@@ -6,7 +6,7 @@
 SUMMARY = "Cross locale generation tool for glibc"
 HOMEPAGE = "http://www.gnu.org/software/libc/libc.html"
 
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = " \
 file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
@@ -27,7 +27,7 @@ inherit autotools
 
 SRCREV_localedef ?= "cd9f958c4c94a638fa7b2b4e21627364f1a1a655"
 
-FILESPATH_append = ":${FILE_DIRNAME}/glibc:${COREBASE}/meta/recipes-core/glibc/glibc"
+FILESPATH:append = ":${FILE_DIRNAME}/glibc:${COREBASE}/meta/recipes-core/glibc/glibc"
 SRC_URI += " \
     git://github.com/kraj/localedef;branch=master;name=localedef;destsuffix=${BP}/localedef;protocol=https \
     file://0016-timezone-re-written-tzselect-as-posix-sh.patch \

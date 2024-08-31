@@ -1,5 +1,5 @@
 SUMMARY = "Multimedia kernel modules package groups"
-LICENSE = "GPLv2 & MIT"
+LICENSE = "GPL-2.0-only & MIT"
 
 
 DEPENDS = "kernel-module-mmngr kernel-module-mmngrbuf \
@@ -14,7 +14,7 @@ PACKAGES = " \
     packagegroup-multimedia-kernel-modules \
 "
 
-RDEPENDS_packagegroup-multimedia-kernel-modules = " \
+RDEPENDS:packagegroup-multimedia-kernel-modules = " \
     kernel-module-mmngr \
     kernel-module-mmngrbuf \
     kernel-module-vspm \

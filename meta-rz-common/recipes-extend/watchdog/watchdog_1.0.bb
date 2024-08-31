@@ -7,15 +7,15 @@ LIC_FILES_CHKSUM = " \
 "
 
 SYSTEMD_AUTO_ENABLE ?= "enable"
-SYSTEMD_SERVICE_${PN} = "watchdog.service"
+SYSTEMD_SERVICE:${PN} = "watchdog.service"
 DEPENDS = "linux-renesas"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
         ${systemd_unitdir}/system/watchdog.service \
         ${bindir}/watchdog-test \
 "
 
-INSANE_SKIP_${PN} = "ldflags"
+INSANE_SKIP:${PN} = "ldflags"
 
 SRC_URI = " \
 	file://watchdog.service \

@@ -4,7 +4,7 @@ require recipes-devtools/gcc/gcc-source.inc
 EXCLUDE_FROM_WORLD = "1"
 
 do_unpack[depends] += "xz-native:do_populate_sysroot"
-do_unpack_append() {
+do_unpack:append() {
     bb.build.exec_func('unpack_extra', d)
 }
 
@@ -20,7 +20,7 @@ unpack_extra() {
 }
 
 # Generate debian/patches/series
-do_debian_patch_prepend() {
+do_debian_patch:prepend() {
 	# Base on debian/rules.defs, set required variables for
 	# using debian/rules.patch to generate debian/patches/series.
 	export distrelease="${DISTRO_CODENAME}"

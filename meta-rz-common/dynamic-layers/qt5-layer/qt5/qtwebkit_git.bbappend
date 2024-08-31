@@ -9,7 +9,7 @@ PACKAGECONFIG = "gstreamer qtmultimedia qtsensors qtwebchannel"
 
 DEPENDS += " gperf-native bison-native python3-native"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += "\
     file://0001-QtWebKit-doesn-t-build-with-ICU-59.patch \

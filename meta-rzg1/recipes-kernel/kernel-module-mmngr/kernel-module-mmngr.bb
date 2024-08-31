@@ -1,7 +1,7 @@
 inherit module
 require include/rz-modules-common.inc
 
-LICENSE = "GPLv2 & MIT"
+LICENSE = "GPL-2.0-only & MIT"
 LIC_FILES_CHKSUM = " \
     file://drv/GPL-COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
     file://drv/MIT-COPYING;md5=fea016ce2bdf2ec10080f69e9381d378 \
@@ -58,7 +58,7 @@ do_install () {
 }
 
 # Append function to clean extract source
-do_cleansstate_prepend() {
+do_cleansstate:prepend() {
         bb.build.exec_func('do_clean_source', d)
 }
 
@@ -68,17 +68,17 @@ do_clean_source() {
     rm -f ${KERNELSRC}/include/mmngr.symvers
 }
 PACKAGES_${PN} += " \
-    FILES_${PN}-staticdev \
+    FILES:${PN}-staticdev \
 "
 
-FILES_${PN}-dev := " \
+FILES:${PN}-dev := " \
     ${includedir}/mmngr.symvers \
     ${includedir}/*.h \
 "
 
-RPROVIDES_${PN} += "kernel-module-mmngr"
+RPROVIDES:${PN} += "kernel-module-mmngr"
 
-python do_package_ipk_prepend () {
+python do_package_ipk:prepend () {
     d.setVar('ALLOW_EMPTY', '1')
 }
 

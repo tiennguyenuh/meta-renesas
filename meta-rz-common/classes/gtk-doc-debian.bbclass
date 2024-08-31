@@ -10,17 +10,17 @@
 GTKDOC_ENABLED ?= "${@bb.utils.contains('DISTRO_FEATURES', 'api-documentation', \
                       bb.utils.contains('MACHINE_FEATURES', 'qemu-usermode', 'True', 'False', d), 'False', d)}"
 
-EXTRA_OECONF_prepend_class-target = "${@bb.utils.contains('GTKDOC_ENABLED', 'True', '--enable-gtk-doc --enable-gtk-doc-html --disable-gtk-doc-pdf', \
+EXTRA_OECONF:prepend:class-target = "${@bb.utils.contains('GTKDOC_ENABLED', 'True', '--enable-gtk-doc --enable-gtk-doc-html --disable-gtk-doc-pdf', \
                                                                                     '--disable-gtk-doc', d)} "
 
 # When building native recipes, disable gtkdoc, as it is not necessary,
 # pulls in additional dependencies, and makes build times longer
-EXTRA_OECONF_prepend_class-native = "--disable-gtk-doc "
-EXTRA_OECONF_prepend_class-nativesdk = "--disable-gtk-doc "
+EXTRA_OECONF:prepend:class-native = "--disable-gtk-doc "
+EXTRA_OECONF:prepend:class-nativesdk = "--disable-gtk-doc "
 
 # Even though gtkdoc is disabled on -native, gtk-doc package is still
 # needed for m4 macros.
-DEPENDS_append = " gtk-doc-native"
+DEPENDS:append = " gtk-doc-native"
 
 # The documentation directory, where the infrastructure will be copied.
 # gtkdocize has a default of "." so to handle out-of-tree builds set this to $S.
@@ -29,15 +29,15 @@ GTKDOC_DOCDIR ?= "${S}"
 export STAGING_DIR_HOST
 
 inherit python3native pkgconfig qemu
-DEPENDS_append = "${@' qemu-native' if d.getVar('GTKDOC_ENABLED') == 'True' else ''}"
+DEPENDS:append = "${@' qemu-native' if d.getVar('GTKDOC_ENABLED') == 'True' else ''}"
 
-do_configure_prepend () {
+do_configure:prepend () {
 	# Need to use ||true as this is only needed if configure.ac both exists
 	# and uses GTK_DOC_CHECK.
 	gtkdocize --srcdir ${S} --docdir ${GTKDOC_DOCDIR} || true
 }
 
-do_compile_prepend_class-target () {
+do_compile:prepend:class-target () {
     if [ ${GTKDOC_ENABLED} = True ]; then
         # Write out a qemu wrapper that will be given to gtkdoc-scangobj so that it
         # can run target helper binaries through that.

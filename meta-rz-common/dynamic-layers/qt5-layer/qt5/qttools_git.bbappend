@@ -10,5 +10,5 @@ LIC_FILES_CHKSUM = " \
     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
 "
 
-PACKAGECONFIG_class-native ??= ""
-PACKAGECONFIG_class-nativesdk ??= ""
+PACKAGECONFIG:class-native ??= ""
+PACKAGECONFIG:class-nativesdk ??= ""

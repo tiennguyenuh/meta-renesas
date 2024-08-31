@@ -1,7 +1,7 @@
 inherit module
 require include/rz-modules-common.inc
 
-LICENSE = "GPLv2 & MIT"
+LICENSE = "GPL-2.0-only & MIT"
 LIC_FILES_CHKSUM = " \
     file://drv/GPL-COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
     file://drv/MIT-COPYING;md5=fea016ce2bdf2ec10080f69e9381d378 \
@@ -33,7 +33,7 @@ do_install() {
 }
 
 # Append function to clean extract source
-do_cleansstate_prepend() {
+do_cleansstate:prepend() {
         bb.build.exec_func('do_clean_source', d)
 }
 
@@ -46,18 +46,18 @@ PACKAGES = "\
     ${PN}-dev \
 "
 
-FILES_${PN}-dev = " \
+FILES:${PN}-dev = " \
     ${includedir}/ \
     ${includedir}/*.h \
     ${includedir}/s3ctl.symvers \
 "
 
-RPROVIDES_${PN} += "kernel-module-s3ctl"
+RPROVIDES:${PN} += "kernel-module-s3ctl"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
 do_configure[noexec] = "1"
 
-python do_package_ipk_prepend () {
+python do_package_ipk:prepend () {
     d.setVar('ALLOW_EMPTY', '1')
 }
 

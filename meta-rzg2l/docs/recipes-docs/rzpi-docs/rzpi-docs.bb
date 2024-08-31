@@ -3,7 +3,7 @@
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 S = "${WORKDIR}"
 
@@ -12,7 +12,7 @@ SRC_URI = " \
     file://RZG2L-SBC_Evaluation_license.pdf \
 "
 
-FILES_${PN} += "/util"
+FILES:${PN} += "/util"
 
 do_install () {
     install -d ${D}/util

@@ -8,7 +8,7 @@ SRC_URI = "file://s3ctl.tar.bz2"
 
 S = "${WORKDIR}/s3ctl"
 
-sysroot_stage_all_append () {
+sysroot_stage_all:append () {
     # add shared header files
     sysroot_stage_dir ${D}/usr/local/include/ ${SYSROOT_DESTDIR}${includedir}
     sysroot_stage_dir ${D}/usr/local/lib/ ${SYSROOT_DESTDIR}${libdir}
@@ -34,13 +34,13 @@ do_install() {
 }
 
 
-sysroot_stage_all_append () {
+sysroot_stage_all:append () {
     # add shared header files
     sysroot_stage_dir ${D}/usr/local/include/ ${SYSROOT_DESTDIR}${includedir} 
 }
 
 # Append function to clean extract source
-do_cleansstate_prepend() {
+do_cleansstate:prepend() {
         bb.build.exec_func('do_clean_source', d)
 }
 
@@ -55,22 +55,22 @@ PACKAGES = "\
     ${PN}-dev \
 "
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     /usr/local/lib/libs3ctl.so.* \
 "
 
-FILES_${PN}-dev = " \
+FILES:${PN}-dev = " \
     /usr/local/lib/libs3ctl.so \
     /usr/local/include/*.h \
 "
 
-RPROVIDES_${PN} += "s3ctl-user-module"
+RPROVIDES:${PN} += "s3ctl-user-module"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-INSANE_SKIP_${PN} += "libdir"
-INSANE_SKIP_${PN}-dev += "libdir"
+INSANE_SKIP:${PN} += "libdir"
+INSANE_SKIP:${PN}-dev += "libdir"
 
 do_configure[noexec] = "1"
 
-python do_package_ipk_prepend () {
+python do_package_ipk:prepend () {
     d.setVar('ALLOW_EMPTY', '1')
 }

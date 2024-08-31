@@ -10,7 +10,7 @@ inherit debian-package
 require recipes-debian/buster/sources/binutils.inc
 BPN = "binutils"
 
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
     file://COPYING.LIB;md5=9f604d8a4f8e74f4f5140845a21b6674 \

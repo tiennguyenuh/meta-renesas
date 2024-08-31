@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = " \
     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
 "
 
-PACKAGES_append = " \
+PACKAGES:append = " \
 	qtlocation-qmlplugins-location \
 	qtlocation-qmlplugins-positioning \
 	qtlocation-plugins-position \
@@ -20,34 +20,34 @@ PACKAGES_append = " \
 	qtlocation-positioning \
 "
 
-FILES_${PN}-qmlplugins = ""
-FILES_${PN}-plugins = ""
-FILES_${PN} = ""
+FILES:${PN}-qmlplugins = ""
+FILES:${PN}-plugins = ""
+FILES:${PN} = ""
 
-FILES_${PN}-qmlplugins-location = " \
+FILES:${PN}-qmlplugins-location = " \
         ${OE_QMAKE_PATH_QML}/QtLocation/* \
 "
 
-FILES_${PN}-qmlplugins-positioning = " \
+FILES:${PN}-qmlplugins-positioning = " \
         ${OE_QMAKE_PATH_QML}/QtPositioning/* \
 "
 
-FILES_${PN}-plugins-geoservices = " \
+FILES:${PN}-plugins-geoservices = " \
         ${OE_QMAKE_PATH_PLUGINS}/geoservices/* \
 "
 
-FILES_${PN}-plugins-position = " \
+FILES:${PN}-plugins-position = " \
         ${OE_QMAKE_PATH_PLUGINS}/position/* \
 "
 
-FILES_${PN}-location = " \
+FILES:${PN}-location = " \
         ${OE_QMAKE_PATH_LIBS}/libQt5Location* \
 "
 
-FILES_${PN}-positioning = " \
+FILES:${PN}-positioning = " \
         ${OE_QMAKE_PATH_LIBS}/libQt5Positioning* \
 "
 
-RDEPENDS_${PN}-qmlplugins += " qtlocation-qmlplugins-location qtlocation-qmlplugins-positioning "
-RDEPENDS_${PN}-plugins += " qtlocation-plugins-position qtlocation-plugins-geoservices "
-RDEPENDS_${PN} += " qtlocation-location qtlocation-positioning "
+RDEPENDS:${PN}-qmlplugins += " qtlocation-qmlplugins-location qtlocation-qmlplugins-positioning "
+RDEPENDS:${PN}-plugins += " qtlocation-plugins-position qtlocation-plugins-geoservices "
+RDEPENDS:${PN} += " qtlocation-location qtlocation-positioning "

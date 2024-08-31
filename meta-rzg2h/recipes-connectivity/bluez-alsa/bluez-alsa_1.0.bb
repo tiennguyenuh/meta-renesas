@@ -22,22 +22,22 @@ inherit autotools pkgconfig
 inherit systemd
 
 SYSTEMD_AUTO_ENABLE = "enable"
-SYSTEMD_SERVICE_${PN} = " bluez-alsa.service"
+SYSTEMD_SERVICE:${PN} = " bluez-alsa.service"
 
 PACKAGECONFIG += "hcitop"
 
-do_install_append () {
+do_install:append () {
     install -d ${D}/lib/systemd/system
     install -m 0644 ${WORKDIR}/bluez-alsa.service ${D}/lib/systemd/system
 }
 
-FILES_${PN} += "\
+FILES:${PN} += "\
   ${datadir}/alsa/alsa.conf.d/20-bluealsa.conf\
   ${libdir}/alsa-lib/libasound_module_ctl_bluealsa.so\
   ${libdir}/alsa-lib/libasound_module_pcm_bluealsa.so\
 "
 
-FILES_${PN}-staticdev += "\
+FILES:${PN}-staticdev += "\
   ${libdir}/alsa-lib/libasound_module_ctl_bluealsa.a\
   ${libdir}/alsa-lib/libasound_module_pcm_bluealsa.a\
 "

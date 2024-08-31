@@ -1,6 +1,6 @@
 DESCRIPTION = "VSP2Driver for the RZG2"
 
-LICENSE = "GPLv2 & MIT"
+LICENSE = "GPL-2.0-only & MIT"
 LIC_FILES_CHKSUM = " \
     file://GPL-COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
     file://MIT-COPYING;md5=192063521ce782a445a3c9f99a8ad560 \
@@ -13,7 +13,7 @@ PN = "kernel-module-vsp2driver"
 PR = "r0"
 
 VSP2DRIVER_URL = " \
-    git://github.com/renesas-rcar/vsp2driver.git"
+    git://github.com/renesas-rcar/vsp2driver.git;branch=master;protocol=https"
 BRANCH = "rcar-gen3"
 SRCREV = "b3a116d8ce68371cac21011ca3b3190ae3576987"
 
@@ -49,12 +49,12 @@ PACKAGES = "\
     ${PN} \
 "
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     /lib/modules/${KERNEL_VERSION}/extra/vsp2.ko \
     ${sysconfdir}/modules-load.d \
 "
 
-RPROVIDES_${PN} += "kernel-module-vsp2driver kernel-module-vsp2"
+RPROVIDES:${PN} += "kernel-module-vsp2driver kernel-module-vsp2"
 
 # Autoload VSP2Driver
-KERNEL_MODULE_AUTOLOAD_append = " vsp2"
+KERNEL_MODULE_AUTOLOAD:append = " vsp2"

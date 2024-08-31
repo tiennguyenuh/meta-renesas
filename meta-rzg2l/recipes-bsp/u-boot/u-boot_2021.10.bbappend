@@ -1,6 +1,6 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
 	${@oe.utils.conditional("USE_ECC", "1", "file://0001-arm-dts-reserved-ECC-memory-region-for-all-RZ-G2L-Se.patch", "", d)} \
 "
 
@@ -9,7 +9,7 @@ UBOOT_SREC ?= "u-boot-elf.${UBOOT_SREC_SUFFIX}"
 UBOOT_SREC_IMAGE ?= "u-boot-elf-${MACHINE}-${PV}-${PR}.${UBOOT_SREC_SUFFIX}"
 UBOOT_SREC_SYMLINK ?= "u-boot-elf-${MACHINE}.${UBOOT_SREC_SUFFIX}"
 
-do_deploy_append() {
+do_deploy:append() {
     if [ -n "${UBOOT_CONFIG}" ]
     then
         for config in ${UBOOT_MACHINE}; do
@@ -39,7 +39,7 @@ do_deploy_append() {
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-UBOOT_URL = "git://github.com/Renesas-SST/u-boot.git"
+UBOOT_URL = "git://github.com/Renesas-SST/u-boot.git;branch=master;protocol=https"
 SRC_URI = "${UBOOT_URL};protocol=https;branch=${BRANCH}"
 BRANCH = "dunfell/rz-sbc"
 SRCREV = "${AUTOREV}"

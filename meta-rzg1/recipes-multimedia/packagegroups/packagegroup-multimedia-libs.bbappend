@@ -1,4 +1,4 @@
-DEPENDS_remove = "vspmif-user-module"
-RDEPENDS_packagegroup-multimedia-libs_remove= " \
+DEPENDS:remove = "vspmif-user-module"
+RDEPENDS:packagegroup-multimedia-libs:remove= " \
     vspmif-user-module \
 "

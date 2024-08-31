@@ -26,7 +26,7 @@ PACKAGES = " \
     packagegroup-vspfilter-init \
 "
 
-RDEPENDS_packagegroup-gstreamer1.0-plugins = " \
+RDEPENDS:packagegroup-gstreamer1.0-plugins = " \
     packagegroup-gstreamer1.0-plugins-base \
     packagegroup-gstreamer1.0-plugins-bad \
     packagegroup-gstreamer1.0-plugins-audio \
@@ -37,15 +37,15 @@ RDEPENDS_packagegroup-gstreamer1.0-plugins = " \
     gstreamer1.0-plugins-bad \
 "
 
-RDEPENDS_packagegroup-gstreamer1.0-plugins-base = " \
+RDEPENDS:packagegroup-gstreamer1.0-plugins-base = " \
     gstreamer1.0-meta-base \
 "
 
-RDEPENDS_packagegroup-gstreamer1.0-plugins-audio = " \
+RDEPENDS:packagegroup-gstreamer1.0-plugins-audio = " \
     gstreamer1.0-meta-audio \
 "
 
-RDEPENDS_packagegroup-gstreamer1.0-plugins-video = " \
+RDEPENDS:packagegroup-gstreamer1.0-plugins-video = " \
     gstreamer1.0-meta-video \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', \
         'gstreamer1.0-plugins-bad-waylandsink', '', d)} \
@@ -54,11 +54,11 @@ RDEPENDS_packagegroup-gstreamer1.0-plugins-video = " \
     gstreamer1.0-rtsp-server \
 "
 
-RDEPENDS_packagegroup-gstreamer1.0-plugins-debug = " \
+RDEPENDS:packagegroup-gstreamer1.0-plugins-debug = " \
     gstreamer1.0-meta-debug \
 "
 
-RDEPENDS_packagegroup-gstreamer1.0-plugins-bad = " \
+RDEPENDS:packagegroup-gstreamer1.0-plugins-bad = " \
     gstreamer1.0-plugins-bad-faac \
     gstreamer1.0-plugins-bad-faad \
 "

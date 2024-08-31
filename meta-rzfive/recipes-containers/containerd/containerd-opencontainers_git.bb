@@ -30,7 +30,7 @@ PV = "${CONTAINERD_VERSION}+git${SRCPV}"
 inherit go
 inherit goarch
 
-export CGO_ENABLED_riscv64 = "1"
+export CGO_ENABLED:riscv64 = "1"
 python(){
     d.appendVar('GOBUILDFLAGS', ' -buildmode=pie')
 }

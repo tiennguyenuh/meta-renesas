@@ -1,6 +1,6 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
 	file://gsx.cfg \
 "
 
@@ -8,7 +8,7 @@ SRC_URI_append = " \
 USB3_FIRMWARE_V2 = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/r8a779x_usb3_v2.dlmem;md5sum=645db7e9056029efa15f158e51cc8a11"
 USB3_FIRMWARE_V3 = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/r8a779x_usb3_v3.dlmem;md5sum=687d5d42f38f9850f8d5a6071dca3109"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
 	${USB3_FIRMWARE_V2} \
 	${USB3_FIRMWARE_V3} \
 	${@bb.utils.contains('MACHINE_FEATURES','usb3','file://usb3.cfg','',d)} \
@@ -21,7 +21,7 @@ REGULATORY_DB_P7S = "https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wi
 # Install Bluetooth firmware to rootfs
 BLUETOOTH_FW = " https://git.ti.com/cgit/wilink8-bt/ti-bt-firmware/plain/TIInit_11.8.32.bts;md5sum=665b7c25be21933acc30dda44cfcace6;downloadfilename=TIInit_11.8.32.bts"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
 	${REGULATORY_DB} \
 	${REGULATORY_DB_P7S} \
 	${BLUETOOTH_FW} \

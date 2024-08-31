@@ -17,7 +17,7 @@ BRANCH_mbedtls = "mbedtls-2.28"
 
 SRC_URI = " \
 	git://github.com/renesas-rz/rzg_trusted-firmware-a.git;branch=${BRANCH};protocol=https \
-	git://github.com/ARMmbed/mbedtls.git;branch=${BRANCH_mbedtls};name=mbedtls;destsuffix=mbedtls \
+	git://github.com/ARMmbed/mbedtls.git;branch=${BRANCH_mbedtls};name=mbedtls;destsuffix=mbedtls;protocol=https \
 "
 
 SRCREV = "c314a391cf3eaf904e3b7a2875af15cc8254dab5"
@@ -29,6 +29,7 @@ COMPATIBLE_MACHINE_rzg2h = "(ek874|hihope-rzg2m|hihope-rzg2n|hihope-rzg2h)"
 COMPATIBLE_MACHINE_rzg2l = "(smarc-rzg2l|rzg2l-dev|smarc-rzg2lc|rzg2lc-dev|smarc-rzg2ul|rzg2ul-dev|smarc-rzv2l|rzv2l-dev)"
 
 PLATFORM ?= "rzg"
+EXTRA_OEMAKE += "PLAT=rzg LSI=G2M"
 
 # requires CROSS_COMPILE set by hand as there is no configure script
 export CROSS_COMPILE="${TARGET_PREFIX}"

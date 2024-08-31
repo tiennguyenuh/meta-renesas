@@ -1,3 +1,3 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-RRECOMMENDS_${PN}_remove = "${PERF}"
+RRECOMMENDS:${PN}:remove = "${PERF}"

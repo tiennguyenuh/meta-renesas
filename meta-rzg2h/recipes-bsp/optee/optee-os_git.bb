@@ -13,7 +13,7 @@ BRANCH = "3.19.0/rz"
 SRCREV = "7c48d905fd57009c2974f247289c84f6d05c384e"
 
 SRC_URI = " \
-	git://github.com/renesas-rz/rzg_optee-os.git;branch=${BRANCH} \
+	git://github.com/renesas-rz/rzg_optee-os.git;branch=${BRANCH};protocol=https \
 "
 
 COMPATIBLE_MACHINE = "(ek874|hihope-rzg2m|hihope-rzg2n|hihope-rzg2h)"
@@ -32,7 +32,7 @@ libdir[unexport] = "1"
 
 S = "${WORKDIR}/git"
 
-CFLAGS_prepend = "--sysroot=${STAGING_DIR_HOST} "
+CFLAGS:prepend = "--sysroot=${STAGING_DIR_HOST} "
 
 EXTRA_OEMAKE = " \
 	PLATFORM=${PLATFORM} PLATFORM_FLAVOR=${PLATFORM_FLAVOR} \
@@ -50,7 +50,7 @@ do_install() {
     #install TA devkit
     install -d ${D}/usr/include/optee/export-user_ta/
 
-    for f in  ${B}/out/arm-plat-${PLATFORM}/export-ta_arm64/* ; do
+    for f in  ${B}/out/arm-plat-${PLATFORM}/export-ta:arm64/* ; do
         cp -aR  $f  ${D}/usr/include/optee/export-user_ta/
     done
 }
@@ -69,6 +69,6 @@ do_deploy() {
 }
 addtask deploy before do_build after do_compile
 
-FILES_${PN}-dev = "/usr/include/optee"
+FILES:${PN}-dev = "/usr/include/optee"
 
-INSANE_SKIP_${PN}-dev = "staticdev"
+INSANE_SKIP:${PN}-dev = "staticdev"

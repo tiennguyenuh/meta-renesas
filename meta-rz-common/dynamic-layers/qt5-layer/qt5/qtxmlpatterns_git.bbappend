@@ -2,9 +2,9 @@
 require qt5.6.3_git.inc
 SRCREV = "50582280b10fb1962b3bdfdd06a72ae1e0325049"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
     file://0001-XSLTTokenizer-queueSorting-remove-redundant.patch \
 "
 

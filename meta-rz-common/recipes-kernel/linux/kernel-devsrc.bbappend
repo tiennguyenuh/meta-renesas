@@ -1,2 +1,2 @@
-INSANE_SKIP_${PN} += "arch"
-RDEPENDS_${PN} += "gawk"
+INSANE_SKIP:${PN} += "arch"
+RDEPENDS:${PN} += "gawk"

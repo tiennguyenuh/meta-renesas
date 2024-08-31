@@ -219,7 +219,7 @@ Currently, there are 2 types of build procedure supported in below description:
     ```
 - To build Docker (optional): comment out a line in conf/local.conf:
    ```
-   DISTRO_FEATURES_remove = " docker"
+   DISTRO_FEATURES:remove = " docker"
    ```
 
 \<target\> for these built types:

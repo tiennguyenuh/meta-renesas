@@ -7,7 +7,7 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://main.qml;beginline=1;endline=39;md5=46fcfe21b4d58845077530223ab020af"
 
 SRCREV = "c43ddf9d354761c51266ecbdc6cb90a3aac1903d"
-SRC_URI = "git://code.qt.io/{non-gerrit}/qt-labs/qt5-launch-demo.git \
+SRC_URI = "git://code.qt.io/{non-gerrit}/qt-labs/qt5-launch-demo.git;branch=master \
 	http://resource.renesas.com/resource/lib/img/products/media/auto-j/microcontrollers-microprocessors/rz/rzg/qt-videos/renesas-bigideasforeveryspace.mp4;name=video \
 	file://0001-VideoSlide-Change-the-video-source-and-workaround-ca.patch \
 	file://0002-Update-GUI-to-compatible-with-RZ-G-platform.patch \
@@ -31,5 +31,5 @@ do_install() {
     chgrp -R $(stat -c "%G" ${D}${datadir}/${PN}) ${D}${datadir}/${PN} 
 }
 
-FILES_${PN} += "${datadir}/${PN}"
+FILES:${PN} += "${datadir}/${PN}"
 

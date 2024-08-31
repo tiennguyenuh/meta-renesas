@@ -1,4 +1,4 @@
-do_install_append() {
+do_install:append() {
 	if [ "${EXT_GFX_BACKEND}" = "1" ]; then
 		# These files are provided in other recipes
 		rm -rf ${D}/${libdir}/libwayland-egl*

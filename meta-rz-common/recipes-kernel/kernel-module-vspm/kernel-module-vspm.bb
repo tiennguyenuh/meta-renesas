@@ -1,6 +1,6 @@
 DESCRIPTION = "VSP Manager for the RZG2"
 
-LICENSE = "GPLv2 & MIT"
+LICENSE = "GPL-2.0-only & MIT"
 LIC_FILES_CHKSUM = " \
     file://GPL-COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
     file://MIT-COPYING;md5=0ebf15a927e436cec699371cd890775c \
@@ -13,13 +13,13 @@ DEPENDS = "linux-renesas"
 PN = "kernel-module-vspm"
 PR = "r0"
 
-VSPM_DRV_URL = "git://github.com/renesas-rcar/vspm_drv.git"
+VSPM_DRV_URL = "git://github.com/renesas-rcar/vspm_drv.git;branch=master;protocol=https"
 BRANCH = "rcar_gen3"
 SRCREV = "07787fc1168e7fe37c305aca151a6f756f35874f"
 
 SRC_URI = "${VSPM_DRV_URL};branch=${BRANCH}"
 
-SRC_URI_append_rzg2l = " \
+SRC_URI:append_rzg2l = " \
         file://0001-Add-ISU-driver.patch \
         file://0002-Add-option-ISU_CSC_RAW.patch \
         file://0003-Add-ISU-to-VSPM.patch \
@@ -72,7 +72,7 @@ do_install () {
     install -m 644 ${S}/${VSPM_DRV_DIR}/include/fdp_drv.h ${D}/${includedir}/
 }
 
-do_install_append_rzg2l () {
+do_install:append_rzg2l () {
     install -m 644 ${S}/${VSPM_DRV_DIR}/include/isu_drv.h ${KERNELSRC}/include/
     install -m 644 ${S}/${VSPM_DRV_DIR}/include/isu_drv.h ${D}/${includedir}/
 }
@@ -86,11 +86,11 @@ PACKAGES = " \
     ${PN}-dev \
 "
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     /lib/modules/${KERNEL_VERSION}/extra/vspm.ko \
 "
 
-RPROVIDES_${PN} += "kernel-module-vspm"
+RPROVIDES:${PN} += "kernel-module-vspm"
 
 # Autoload VSPM
-KERNEL_MODULE_AUTOLOAD_append = " vspm"
+KERNEL_MODULE_AUTOLOAD:append = " vspm"

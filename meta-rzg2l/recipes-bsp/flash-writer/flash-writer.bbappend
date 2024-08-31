@@ -1,11 +1,11 @@
 require include/rzg2l-optee-config.inc
 inherit python3native
 
-DEPENDS_append = " \
+DEPENDS:append = " \
 	${@oe.utils.conditional("TRUSTED_BOARD_BOOT", "1", "python3-pycryptodome-native python3-pycryptodomex-native secprv-native bootparameter-native", "",d)} \
 "
 
-FLASH_WRITER_URL = "git://github.com/Renesas-SST/flash-writer.git"
+FLASH_WRITER_URL = "git://github.com/Renesas-SST/flash-writer.git;branch=master;protocol=https"
 BRANCH = "dunfell/rz-sbc"
 SRC_URI = "${FLASH_WRITER_URL};protocol=https;branch=${BRANCH}"
 SRCREV = "${AUTOREV}"
@@ -13,7 +13,7 @@ SRCREV = "${AUTOREV}"
 BUILD_TBB_DIR = "${S}/build_tbb"
 PMIC_BUILD_TBB_DIR = "${S}/build_pmic_tbb"
 
-do_compile_append() {
+do_compile:append() {
 	if [ "${TRUSTED_BOARD_BOOT}" = "1" ]; then
 		oe_runmake OUTPUT_DIR=${BUILD_TBB_DIR} clean
 		oe_runmake BOARD=${BOARD} OUTPUT_DIR=${BUILD_TBB_DIR} TRUSTED_BOARD_BOOT=ENABLE
@@ -69,14 +69,14 @@ do_compile_append() {
 }
 
 # Support for RZ SBC board
-do_compile_prepend() {
+do_compile:prepend() {
 	if [ "${MACHINE}" = "rzpi" ]; then
 		BOARD="RZG2L_SBC";
 		PMIC_BOARD="RZG2L_SMARC_PMIC";
 	fi
 }
 
-do_compile_append() {
+do_compile:append() {
 	mv ${S}/AArch64_output/Flash_Writer*${BOARD}*.mot ${S}/AArch64_output/Flash_Writer_SCIF_${MACHINE}.mot
 	mv ${S}/build_pmic/Flash_Writer*${PMIC_BOARD}*.mot ${S}/build_pmic/Flash_Writer_SCIF_${MACHINE}_PMIC.mot
 }

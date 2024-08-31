@@ -13,10 +13,10 @@ EXTRA_OEMAKE = "ARCH=${TARGET_ARCH}"
 
 includedir = "${RENESAS_DATADIR}/include"
 
-WS_aarch64 = ""
-WS_virtclass-multilib-lib32 = "32"
+WS:aarch64 = ""
+WS:virtclass-multilib-lib32 = "32"
 
-SRC_URI_append_rzg2l = " \
+SRC_URI:append_rzg2l = " \
 	file://0001-Modify-vspm_public.h-for-ISUM.patch \
 	file://0002-Modify-Makefile-for-building-vspm_api_isu.patch \
 	file://0003-Add-vspm_api_isu.c-for-ISUM.patch \
@@ -24,7 +24,7 @@ SRC_URI_append_rzg2l = " \
 	file://0005-vspm_api_isu-Free-callback-vspmif-data-after-finishi.patch \
 "
 
-do_compile_prepend_rzg2l() {
+do_compile:prepend_rzg2l() {
     if [ X${WS} = "X32" ]; then
         export VSPM32="1"
     fi
@@ -61,6 +61,6 @@ PACKAGES = "\
     ${PN}-dbg \
 "
 
-RPROVIDES_${PN} += "vspmif-user-module"
-INSANE_SKIP_${PN} += "libdir"
-INSANE_SKIP_${PN}-dev += "libdir"
+RPROVIDES:${PN} += "vspmif-user-module"
+INSANE_SKIP:${PN} += "libdir"
+INSANE_SKIP:${PN}-dev += "libdir"

@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = " \
     file://LGPL_EXCEPTION.txt;md5=9625233da42f9e0ce9d63651a9d97654 \
     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
 "
-FILESEXTRAPATHS_prepend := "${THISDIR}/qtdeclarative:"
-SRC_URI_append = " \
+FILESEXTRAPATHS:prepend := "${THISDIR}/qtdeclarative:"
+SRC_URI:append = " \
     file://0001-Build-developer-mode.patch \
     file://0002-qtdeclarative-switch-to-use-python3-instead-of-pytho.patch \
 "

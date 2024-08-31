@@ -10,31 +10,31 @@ LIC_FILES_CHKSUM = " \
     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
 "
 
-FILESEXTRAPATHS_append := "${THISDIR}/qtwayland:"
-SRC_URI_append  = " \
+FILESEXTRAPATHS:append := "${THISDIR}/qtwayland:"
+SRC_URI:append  = " \
     file://0003-qt5wayland-fix-hardwareintegration-client-xcomposite.patch \
     file://0001-qwaylandintegration-Fix-missing-freeing-for-clie.patch \
 "
 
 DEP = " freetype fontconfig"
-RDEPENDS_${PN} += "${DEP}"
-RDEPENDS_${PN}-plugins += "${DEP}"
-RDEPENDS_${PN}-examples += "${DEP}"
+RDEPENDS:${PN} += "${DEP}"
+RDEPENDS:${PN}-plugins += "${DEP}"
+RDEPENDS:${PN}-examples += "${DEP}"
 
-DEPENDS_append_rzg2 = " ${@bb.utils.contains('COMBINED_FEATURES', 'opengles', '', 'mesa', d)}"
-DEPENDS_remove = " xproto"
+DEPENDS:append_rzg2 = " ${@bb.utils.contains('COMBINED_FEATURES', 'opengles', '', 'mesa', d)}"
+DEPENDS:remove = " xproto"
 
 
-DEPENDS_class-nativesdk = "qtbase qtdeclarative wayland"
-RDEPENDS_${PN}_class-nativesdk = ""
-RDEPENDS_${PN}-plugins_class-nativesdk = ""
-RDEPENDS_${PN}-examples_class-nativesdk = ""
+DEPENDS:class-nativesdk = "qtbase qtdeclarative wayland"
+RDEPENDS:${PN}:class-nativesdk = ""
+RDEPENDS:${PN}-plugins:class-nativesdk = ""
+RDEPENDS:${PN}-examples:class-nativesdk = ""
 
-QMAKE_PROFILES_class-native = "${S}/src/qtwaylandscanner"
-QMAKE_PROFILES_class-nativesdk = "${S}/src/qtwaylandscanner"
-B_class-native = "${SEPB}/src/qtwaylandscanner"
-B_class-nativesdk = "${SEPB}/src/qtwaylandscanner"
+QMAKE_PROFILES:class-native = "${S}/src/qtwaylandscanner"
+QMAKE_PROFILES:class-nativesdk = "${S}/src/qtwaylandscanner"
+B:class-native = "${SEPB}/src/qtwaylandscanner"
+B:class-nativesdk = "${SEPB}/src/qtwaylandscanner"
 
 BBCLASSEXTEND =+ "native nativesdk"
 
-RPROVIDES_${PN} += " ${PN}-tools "
+RPROVIDES:${PN} += " ${PN}-tools "

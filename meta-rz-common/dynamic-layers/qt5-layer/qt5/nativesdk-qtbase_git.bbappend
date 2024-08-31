@@ -2,10 +2,10 @@
 require qt5.6.3_git.inc
 SRCREV = "e6f8b072d2bf15f8b82bede48ff29ce8ac8dbd9a"
 
-FILESEXTRAPATHS_append := "${THISDIR}/qtbase:"
+FILESEXTRAPATHS:append := "${THISDIR}/qtbase:"
 
 # Replace patch to work with Qt5.6.3, old patch only work with Qt.5.6.2
-SRC_URI_remove = "file://0010-Add-external-hostbindir-option-for-native-sdk.patch"
+SRC_URI:remove = "file://0010-Add-external-hostbindir-option-for-native-sdk.patch"
 SRC_URI += " file://0011-Add-external-hostbindir-option-for-native-sdk.patch"
 
 LIC_FILES_CHKSUM = " \
@@ -79,14 +79,14 @@ do_configure() {
 # /opt/poky/*/sysroots/x86_64-pokysdk-linux/environment-setup.d
 DIRFILES=""
 
-ALLOW_EMPTY_${PN}-fonts = "1"
+ALLOW_EMPTY:${PN}-fonts = "1"
 
-FILES_${PN}-fonts-ttf-vera       = "${OE_QMAKE_PATH_QT_FONTS}/Vera*.ttf"
-FILES_${PN}-fonts-ttf-dejavu     = "${OE_QMAKE_PATH_QT_FONTS}/DejaVu*.ttf"
-FILES_${PN}-fonts-pfa            = "${OE_QMAKE_PATH_QT_FONTS}/*.pfa"
-FILES_${PN}-fonts-pfb            = "${OE_QMAKE_PATH_QT_FONTS}/*.pfb"
-FILES_${PN}-fonts-qpf            = "${OE_QMAKE_PATH_QT_FONTS}/*.qpf*"
-FILES_${PN}-fonts                = "${OE_QMAKE_PATH_QT_FONTS}/README \
+FILES:${PN}-fonts-ttf-vera       = "${OE_QMAKE_PATH_QT_FONTS}/Vera*.ttf"
+FILES:${PN}-fonts-ttf-dejavu     = "${OE_QMAKE_PATH_QT_FONTS}/DejaVu*.ttf"
+FILES:${PN}-fonts-pfa            = "${OE_QMAKE_PATH_QT_FONTS}/*.pfa"
+FILES:${PN}-fonts-pfb            = "${OE_QMAKE_PATH_QT_FONTS}/*.pfb"
+FILES:${PN}-fonts-qpf            = "${OE_QMAKE_PATH_QT_FONTS}/*.qpf*"
+FILES:${PN}-fonts                = "${OE_QMAKE_PATH_QT_FONTS}/README \
                                     ${OE_QMAKE_PATH_QT_FONTS}/fontdir"
 
-INSANE_SKIP_${PN} += " installed-vs-shipped"
+INSANE_SKIP:${PN} += " installed-vs-shipped"

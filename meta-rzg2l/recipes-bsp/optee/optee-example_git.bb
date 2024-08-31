@@ -3,7 +3,7 @@ SUMMARY = "OP-TEE example"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit deploy python3native
 
-LICENSE = "BSD & GPLv2"
+LICENSE = "BSD & GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=cd95ab417e23b94f381dafc453d70c30"
 
 #TAG: 3.19.0
@@ -12,7 +12,7 @@ BRANCH = "master"
 SRCREV = "f301ee9df2129c0db683e726c91dc2cefe4cdb65"
 
 SRC_URI = " \
-	git://github.com/linaro-swg/optee_examples.git;branch=${BRANCH} \
+	git://github.com/linaro-swg/optee_examples.git;branch=${BRANCH};protocol=https \
 	file://git \
 "
 
@@ -22,7 +22,7 @@ DEPENDS += "python3-pyelftools-native python3-cryptography-native"
 TEEC_EXPORT = "${STAGING_DIR_HOST}${prefix}"
 TA_DEV_KIT_DIR = "${STAGING_INCDIR}/optee/export-user_ta/"
 
-CFLAGS_prepend = "--sysroot=${STAGING_DIR_HOST}"
+CFLAGS:prepend = "--sysroot=${STAGING_DIR_HOST}"
 
 EXTRA_OEMAKE = " \
 	TA_DEV_KIT_DIR=${TA_DEV_KIT_DIR} \

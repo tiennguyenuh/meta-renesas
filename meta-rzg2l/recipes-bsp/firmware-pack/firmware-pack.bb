@@ -14,7 +14,10 @@ DEPENDS += " bootparameter-native fiptool-native"
 
 S = "${WORKDIR}"
 
+UBOOT_DIR = "${DEPLOY_DIR}/images/${MACHINE}"
+
 do_configure[noexec] = "1"
+do_compile[depends] += "u-boot:do_deploy"
 
 do_compile () {
 
@@ -26,7 +29,7 @@ do_compile () {
 	cat ${RECIPE_SYSROOT}/boot/bl2-${MACHINE}.bin >> bl2_bp.bin
 
 	# Create fip.bin
-	fiptool create --align 16 --soc-fw ${RECIPE_SYSROOT}/boot/bl31-${MACHINE}.bin --nt-fw ${RECIPE_SYSROOT}/boot/u-boot.bin fip.bin
+	fiptool create --align 16 --soc-fw ${RECIPE_SYSROOT}/boot/bl31-${MACHINE}.bin --nt-fw ${UBOOT_DIR}/u-boot.bin fip.bin
 
 	# Convert to srec
 	objcopy -I binary -O srec --adjust-vma=0x00011E00 --srec-forceS3 bl2_bp.bin bl2_bp.srec
@@ -38,7 +41,7 @@ do_compile () {
 		cp bl2_bp_pmic.bin bl2_bp_esd_pmic.bin
 
 		cat ${RECIPE_SYSROOT}/boot/bl2-${MACHINE}_pmic.bin >> bl2_bp_pmic.bin
-		fiptool create --align 16 --soc-fw ${RECIPE_SYSROOT}/boot/bl31-${MACHINE}_pmic.bin --nt-fw ${RECIPE_SYSROOT}/boot/u-boot.bin fip_pmic.bin
+		fiptool create --align 16 --soc-fw ${RECIPE_SYSROOT}/boot/bl31-${MACHINE}_pmic.bin --nt-fw ${UBOOT_DIR}/u-boot.bin fip_pmic.bin
 		objcopy -O srec --adjust-vma=0x00011E00 --srec-forceS3 -I binary bl2_bp_pmic.bin bl2_bp_pmic.srec
 		objcopy -I binary -O srec --adjust-vma=0x0000 --srec-forceS3 fip_pmic.bin fip_pmic.srec
 	fi

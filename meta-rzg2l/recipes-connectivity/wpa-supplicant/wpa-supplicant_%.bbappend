@@ -3,7 +3,7 @@ HOMEPAGE = "http://w1.fi/wpa_supplicant/"
 DESCRIPTION = "wpa_supplicant is a WPA Supplicant for Linux, BSD, Mac OS X, and Windows with support for WPA and WPA2 (IEEE 802.11i / RSN). Supplicant is the IEEE 802.1X/WPA component that is used in the client stations. It implements key negotiation with a WPA Authenticator and it controls the roaming and IEEE 802.11 authentication/association of the wlan driver."
 
 # Overwrite the SYSTEMD_SERVICE
-SYSTEMD_SERVICE_${PN} = ""
+SYSTEMD_SERVICE:${PN} = ""
 
 # Overwrite the installation of wpa_supplicant.service when installing on rootfs systemd and dbus
 # This action is considered as a work around to support eSDK build when eSDK do_sdk_depends task always

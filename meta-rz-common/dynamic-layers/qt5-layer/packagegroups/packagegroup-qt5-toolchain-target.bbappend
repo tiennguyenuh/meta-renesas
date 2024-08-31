@@ -4,7 +4,7 @@ USE_X11 = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', '${USE_WAYLAND}', 'qtx11extras-mkspecs', d)} \
 "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     qtbase-tools \
     qtdeclarative-tools \
     qtxmlpatterns-tools \
@@ -19,16 +19,16 @@ USE_RUBY = " "
 # # Remove qtenginio as it it not guarantee compatible with Qt5.6
 # # Also do not build qt3d and qtlocation by default due to their license (not
 # have LGPLv2.1)
-RDEPENDS_${PN}_remove = "qtsystems-dev"
-RDEPENDS_${PN}_remove = "qtsystems-mkspecs"
-RDEPENDS_${PN}_remove = "qtsystems-qmlplugins"
-RDEPENDS_${PN}_remove = "qtenginio-dev"
-RDEPENDS_${PN}_remove = "qtenginio-mkspecs"
-RDEPENDS_${PN}_remove = "qtenginio-qmlplugins"
-RDEPENDS_${PN}_remove = "qt3d-dev"
-RDEPENDS_${PN}_remove = "qt3d-mkspecs"
-RDEPENDS_${PN}_remove = "qt3d-qmlplugins"
-RDEPENDS_${PN}_remove = "qtlocation-dev"
-RDEPENDS_${PN}_remove = "qtlocation-mkspecs"
-RDEPENDS_${PN}_remove = "qtlocation-plugins"
-RDEPENDS_${PN}_remove = "qtlocation-qmlplugins"
+RDEPENDS:${PN}:remove = "qtsystems-dev"
+RDEPENDS:${PN}:remove = "qtsystems-mkspecs"
+RDEPENDS:${PN}:remove = "qtsystems-qmlplugins"
+RDEPENDS:${PN}:remove = "qtenginio-dev"
+RDEPENDS:${PN}:remove = "qtenginio-mkspecs"
+RDEPENDS:${PN}:remove = "qtenginio-qmlplugins"
+RDEPENDS:${PN}:remove = "qt3d-dev"
+RDEPENDS:${PN}:remove = "qt3d-mkspecs"
+RDEPENDS:${PN}:remove = "qt3d-qmlplugins"
+RDEPENDS:${PN}:remove = "qtlocation-dev"
+RDEPENDS:${PN}:remove = "qtlocation-mkspecs"
+RDEPENDS:${PN}:remove = "qtlocation-plugins"
+RDEPENDS:${PN}:remove = "qtlocation-qmlplugins"

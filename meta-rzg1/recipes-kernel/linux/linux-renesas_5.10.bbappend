@@ -1,10 +1,10 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 USB3_FW = "https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/r8a779x_usb3_v1.dlmem?h=20230625;md5sum=5a3cb919ba099d9cd21cf3685eb59b5d;downloadfilename=r8a779x_usb3_v1.dlmem"
 REGULATORY_DB = "https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/plain/regulatory.db?h=master-2019-06-03;md5sum=ce7cdefff7ba0223de999c9c18c2ff6f;downloadfilename=regulatory.db"
 REGULATORY_DB_P7S = "https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/plain/regulatory.db.p7s?h=master-2019-06-03;md5sum=489924336479385e2c35c21d10eb3ca2;downloadfilename=regulatory.db.p7s"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
 	file://rzg1_common.cfg \
 	file://patches.scc \
 	${USB3_FW} \
@@ -12,23 +12,23 @@ SRC_URI_append = " \
 	${REGULATORY_DB_P7S} \
 "
 
-SRC_URI_append_iwg22m = " \
+SRC_URI:append_iwg22m = " \
 	file://iwg22m.cfg \
 "
 
-SRC_URI_append_iwg20m-g1m = " \
+SRC_URI:append_iwg20m-g1m = " \
 	file://iwg20m.cfg \
 "
 
-SRC_URI_append_iwg20m-g1n = " \
+SRC_URI:append_iwg20m-g1n = " \
 	file://iwg20m.cfg \
 "
 
-SRC_URI_append_iwg21m = " \
+SRC_URI:append_iwg21m = " \
 	file://iwg21m.cfg \
 "
 
-SRC_URI_append_iwg23s = " \
+SRC_URI:append_iwg23s = " \
 	file://iwg23s.cfg \
 	file://patches_iwg23s.scc \
 "

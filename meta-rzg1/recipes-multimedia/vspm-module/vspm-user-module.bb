@@ -48,11 +48,11 @@ PACKAGES = "\
     ${PN}-dev \
 "
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     /usr/local/lib/libvspm.so.* \
 "
 
-FILES_${PN}-dev = " \
+FILES:${PN}-dev = " \
     /usr/local/lib \
     /usr/local/lib/libvspm.so \
     /usr/local/lib/* \
@@ -60,7 +60,7 @@ FILES_${PN}-dev = " \
     /usr/local/include/*.h \
 "
 
-RPROVIDES_${PN} += "vspm-user-module"
+RPROVIDES:${PN} += "vspm-user-module"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-INSANE_SKIP_${PN} += "libdir"
-INSANE_SKIP_${PN}-dev += "libdir"
+INSANE_SKIP:${PN} += "libdir"
+INSANE_SKIP:${PN}-dev += "libdir"

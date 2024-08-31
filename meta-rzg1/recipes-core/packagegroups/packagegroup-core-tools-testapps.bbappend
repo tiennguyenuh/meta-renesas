@@ -1,2 +1,2 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-RDEPENDS_${PN}_remove = "ltp"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+RDEPENDS:${PN}:remove = "ltp"

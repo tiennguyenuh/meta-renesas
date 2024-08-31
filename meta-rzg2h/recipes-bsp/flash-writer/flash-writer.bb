@@ -3,7 +3,7 @@ LICENSE="BSD-3-Clause"
 PV = "1.05+git${SRCPV}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-FLASH_WRITER_URL = "git://github.com/renesas-rz/rzg2_flash_writer"
+FLASH_WRITER_URL = "git://github.com/renesas-rz/rzg2_flash_writer;branch=master;protocol=https"
 BRANCH = "master"
 
 SRC_URI = "${FLASH_WRITER_URL};branch=${BRANCH}"

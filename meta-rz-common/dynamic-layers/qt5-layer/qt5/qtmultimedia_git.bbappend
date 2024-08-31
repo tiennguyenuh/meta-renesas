@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
 "
 
-SRC_URI_append = " \
+SRC_URI:append = " \
 	file://0001-Fix-binding-loop-for-declarative-camera.patch \
 	file://0003-qtmultimedia-replace-playbin-by-playbin3-to-play-vid.patch \
 	file://0004-qtmultimedia-qmlvideo-add-fullscreen-display-support.patch \
@@ -24,11 +24,11 @@ SRC_URI_append = " \
 	file://0012-plugins-alsa-Add-default-key-for-alsa-plugin.patch \
 "
 
-PACKAGECONFIG_append = " gstreamer alsa"
+PACKAGECONFIG:append = " gstreamer alsa"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-RDEPENDS_${PN}-plugins += " \
+RDEPENDS:${PN}-plugins += " \
 	gstreamer1.0 \
 	gstreamer1.0-libav \
 	gstreamer1.0-plugins-base \

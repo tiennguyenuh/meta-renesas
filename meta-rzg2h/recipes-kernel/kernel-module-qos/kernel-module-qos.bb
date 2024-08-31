@@ -1,8 +1,8 @@
 DESCRIPTION = "QoS driver for the RZG2"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}/:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}/:"
 
-LICENSE = "GPLv2 & MIT"
+LICENSE = "GPL-2.0-only & MIT"
 LIC_FILES_CHKSUM = " \
     file://GPL-COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
     file://MIT-COPYING;md5=192063521ce782a445a3c9f99a8ad560 \
@@ -15,7 +15,7 @@ DEPENDS = "linux-renesas"
 PN = "kernel-module-qos"
 PR = "r0"
 
-QOS_DRV_URL = "git://github.com/renesas-rcar/qos_drv.git"
+QOS_DRV_URL = "git://github.com/renesas-rcar/qos_drv.git;branch=master;protocol=https"
 BRANCH = "rcar-gen3"
 SRCREV = "90981d2aa1730589fa87b50f07d9feec09396b9b"
 
@@ -58,6 +58,6 @@ PACKAGES = " \
     ${PN}-dbg \
 "
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     /lib/modules/${KERNEL_VERSION}/extra/qos.ko \
 "

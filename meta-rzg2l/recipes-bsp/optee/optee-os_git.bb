@@ -16,7 +16,7 @@ BRANCH = "3.19.0/rz"
 SRCREV = "f9a0900230a5341d9a83799dab89f08f65840458"
 
 SRC_URI = " \
-	git://github.com/renesas-rz/rzg_optee-os.git;branch=${BRANCH} \
+	git://github.com/renesas-rz/rzg_optee-os.git;branch=${BRANCH};protocol=https \
 "
 
 SRC_URI += " \
@@ -43,7 +43,7 @@ libdir[unexport] = "1"
 
 S = "${WORKDIR}/git"
 
-CFLAGS_prepend = "--sysroot=${STAGING_DIR_HOST}"
+CFLAGS:prepend = "--sysroot=${STAGING_DIR_HOST}"
 
 RZ_SCE ?= "n"
 EXTRA_OEMAKE = " \
@@ -57,7 +57,7 @@ do_install() {
 	#install TA devkit
 	install -d ${D}/usr/include/optee/export-user_ta/
 
-	for f in  ${B}/out/arm-plat-${PLATFORM}/export-ta_arm64/* ; do
+	for f in  ${B}/out/arm-plat-${PLATFORM}/export-ta:arm64/* ; do
 		cp -aR	$f	${D}/usr/include/optee/export-user_ta/
 	done
 
@@ -69,9 +69,9 @@ do_install() {
 	install -m 0644 ${S}/out/arm-plat-${PLATFORM}/core/tee-raw.bin ${D}/boot/tee-${MACHINE}.bin
 }
 
-FILES_${PN} = "/boot "
+FILES:${PN} = "/boot "
 SYSROOT_DIRS += "/boot"
 
-FILES_${PN}-dev = "/usr/include/optee"
+FILES:${PN}-dev = "/usr/include/optee"
 
-INSANE_SKIP_${PN}-dev = "staticdev"
+INSANE_SKIP:${PN}-dev = "staticdev"

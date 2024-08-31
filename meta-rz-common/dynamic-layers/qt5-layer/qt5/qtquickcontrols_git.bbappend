@@ -2,10 +2,10 @@
 require qt5.6.3_git.inc
 SRCREV = "b66f6b05c5f8024ddd9f8c46f33ccb618323999e"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/qtquickcontrols:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/qtquickcontrols:"
 
 # Replace patch to work with Qt5.6.2, old patch only work with Qt.5.6.1
-SRC_URI_remove = "file://0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch"
+SRC_URI:remove = "file://0001-texteditor-fix-invalid-use-of-incomplete-type-class-.patch"
 SRC_URI += " file://0001-Update-texteditor-fix-invalid-use-of-incomplete-type-class-.patch "
 
 LIC_FILES_CHKSUM = " \

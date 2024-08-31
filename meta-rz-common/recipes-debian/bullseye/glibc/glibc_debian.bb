@@ -10,7 +10,7 @@ inherit debian-package
 require recipes-debian/bullseye/sources/glibc.inc
 BPN = "glibc"
 
-LICENSE = "GPLv2 & LGPLv2.1"
+LICENSE = "GPL-2.0-only & LGPL-2.1-only"
 LIC_FILES_CHKSUM = " \
 file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c \
@@ -20,7 +20,7 @@ file://LICENSES;md5=1541fd8f5e8f1579512bf05f533371ba \
 DEPENDS += "gperf-native bison-native"
 PROVIDES += "virtual/crypt"
 
-FILESPATH_append = ":${FILE_DIRNAME}/glibc"
+FILESPATH:append = ":${FILE_DIRNAME}/glibc"
 
 # Ignore patches 0018, 0019 and 0020 because Debian already has similar patches.
 SRC_URI += " \
@@ -53,7 +53,7 @@ SRC_URI += " \
            "
 
 NATIVESDKFIXES ?= ""
-NATIVESDKFIXES_class-nativesdk = "\
+NATIVESDKFIXES:class-nativesdk = "\
            file://0001-nativesdk-glibc-Look-for-host-system-ld.so.cache-as-.patch \
            file://0002-nativesdk-glibc-Fix-buffer-overrun-with-a-relocated-.patch \
            file://0003-nativesdk-glibc-Raise-the-size-of-arrays-containing-.patch \
@@ -91,7 +91,7 @@ EXTRA_OECONF = "--enable-kernel=${OLDEST_KERNEL} \
 
 EXTRA_OECONF += "${@get_libc_fpu_setting(bb, d)}"
 
-do_patch_append() {
+do_patch:append() {
     bb.build.exec_func('do_fix_readlib_c', d)
 }
 
@@ -127,7 +127,7 @@ do_compile () {
 	fi
 }
 
-do_install_append() {
+do_install:append() {
 	# TODO: Should disable build/install these files by configurations.
 	# Poky has split rpc and libnsl to other recipes,
 	# this is workaround to avoid conflict with libnsl2, quota.
@@ -141,7 +141,7 @@ do_install_append() {
 require glibc-package.inc
 
 # This is a backport of poky's 38fce3d2fd998a67604f9492ab3a571f963c5df3
-RDEPENDS_${PN}-dev = "linux-libc-headers-dev"
+RDEPENDS:${PN}-dev = "linux-libc-headers-dev"
 
 stash_locale_sysroot_cleanup() {
         stash_locale_cleanup ${SYSROOT_DESTDIR}
@@ -166,7 +166,7 @@ do_install_armmultilib () {
         oe_multilib_header sys/elf.h sys/procfs.h sys/ptrace.h sys/ucontext.h sys/user.h
 }
 
-#FILES_${PN} += "${sysconfdir}/nsswitch.conf"
-FILES_${PN} += "${base_libdir}/libcrypt*.so.* ${base_libdir}/libcrypt-*.so"
+#FILES:${PN} += "${sysconfdir}/nsswitch.conf"
+FILES:${PN} += "${base_libdir}/libcrypt*.so.* ${base_libdir}/libcrypt-*.so"
 
 BBCLASSEXTEND = "nativesdk"

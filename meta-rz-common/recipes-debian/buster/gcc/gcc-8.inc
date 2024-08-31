@@ -4,7 +4,7 @@
 # base commit: da24071e92071ecbefe51314d82bf40f85172485
 #
 
-FILESPATH_append = "${FILE_DIRNAME}/gcc-8:${FILE_DIRNAME}/gcc-8.3:${FILE_DIRNAME}/gcc-8.3/backport"
+FILESPATH:append = "${FILE_DIRNAME}/gcc-8:${FILE_DIRNAME}/gcc-8.3:${FILE_DIRNAME}/gcc-8.3/backport"
 
 require gcc-8.3.inc
 BINV = "${PV}"
@@ -58,4 +58,4 @@ SRC_URI += " \
 "
 
 # CVE-2021-37322 is already fixed but NVD db is not updated.
-CVE_CHECK_WHITELIST = "CVE-2021-37322"
+CVE_CHECK_IGNORE = "CVE-2021-37322"

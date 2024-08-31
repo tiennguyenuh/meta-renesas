@@ -1,5 +1,5 @@
 # Basic packages
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
     kernel-image \
     kernel-devicetree \
     bash \
@@ -118,7 +118,7 @@ update_deb_issues() {
 	touch ${IMAGE_ROOTFS}/var/lib/dpkg/status
 	touch ${IMAGE_ROOTFS}/var/lib/dpkg/available
 
-	cp -r ${IMAGE_ROOTFS}/usr/lib64/apt/ ${IMAGE_ROOTFS}/usr/lib/apt
+	#cp -r ${IMAGE_ROOTFS}/usr/lib64/apt/ ${IMAGE_ROOTFS}/usr/lib/apt
 }
 
 ROOTFS_POSTPROCESS_COMMAND += " update_issue; update_deb_issues; "
@@ -129,39 +129,39 @@ BASIC_32BIT_PKGS = " \
 "
 
 # Support secure environment
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
     optee-client \
 "
 
-BASIC_32BIT_PKGS_append_rzg2h = " \
+BASIC_32BIT_PKGS:append_rzg2h = " \
     lib32-optee-client \
 "
 
 # Installation for 32bit packages
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
     ${@oe.utils.conditional("USE_32BIT_PKGS", "1", "${BASIC_32BIT_PKGS}", "", d)} \
 "
 
 # Qos user packages only supports 64bit.
 QOS_USER_PKGS = ""
-QOS_USER_PKGS_aarch64 = " \
+QOS_USER_PKGS:aarch64 = " \
     qosif-user-module \
     qosif-tp-user-module \
 "
 
 # Installation for QoS packages
-IMAGE_INSTALL_append_rzg2h = " \
+IMAGE_INSTALL:append_rzg2h = " \
     kernel-module-qos \
     ${QOS_USER_PKGS} \
 "
 
 # Support Docker Engine
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
     packagegroup-docker \
 "
 
 # Remove since RZG1 don't support LTTNG
-IMAGE_INSTALL_remove_rzg1 = " \
+IMAGE_INSTALL:remove_rzg1 = " \
   lttng-tools \
   lttng-modules \
   lttng-ust \

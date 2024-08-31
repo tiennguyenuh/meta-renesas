@@ -10,7 +10,7 @@ inherit debian-package
 require recipes-debian/buster/sources/glib2.0.inc
 DEBIAN_UNPACK_DIR = "${WORKDIR}/glib-${PV}"
 
-FILESPATH_append = ":${FILE_DIRNAME}/glib2.0"
+FILESPATH:append = ":${FILE_DIRNAME}/glib2.0"
 SRC_URI += " \
     file://run-ptest \
     file://uclibc_musl_translation.patch \
@@ -22,4 +22,4 @@ SRC_URI += " \
     file://0001-meson-do-a-build-time-check-for-strlcpy-before-attem.patch \
     file://glib-meson.cross \
 "
-SRC_URI_append_class-natve = "file://relocate-modules.patch"
+SRC_URI:append_class-natve = "file://relocate-modules.patch"

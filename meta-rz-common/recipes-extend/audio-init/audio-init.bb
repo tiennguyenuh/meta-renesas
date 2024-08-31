@@ -1,8 +1,8 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
     file://audio.sh \
     file://COPYING.MIT \
 "
@@ -16,6 +16,6 @@ do_configure[noexec] = "1"
 do_patch[noexec] = "1"
 do_compile[noexec] = "1"
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     ${sysconfdir}/profile.d/audio.sh \
 "

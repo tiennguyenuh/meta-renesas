@@ -9,9 +9,9 @@ LIC_FILES_CHKSUM = " \
     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
 "
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:" 
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:" 
  
-SRC_URI_append = " \
+SRC_URI:append = " \
     file://0001-Fix-division-by-zero-in-radial-gradiants-with-NEON.patch \
     file://0002-Make-tst_QOpenGLWindow-pass-on-platforms-where-the-d.patch \
     file://0003-Blacklist-and-skip-failing-tests-for-Boot2Qt-64-bit-.patch \
@@ -25,21 +25,21 @@ PACKAGECONFIG_GL = "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gles2', '
 
 DEP = " mtdev libxkbcommon freetype fontconfig libinput libproxy"
 
-RDEPENDS_${PN} += "${DEP}"
-RDEPENDS_${PN}-plugins += "${DEP}"
-RDEPENDS_${PN}-examples += "${DEP}"
+RDEPENDS:${PN} += "${DEP}"
+RDEPENDS:${PN}-plugins += "${DEP}"
+RDEPENDS:${PN}-examples += "${DEP}"
 
 # qtbase does not support openssl 1.1 until version 5.10
-PACKAGECONFIG_remove = "openssl"
+PACKAGECONFIG:remove = "openssl"
 
 # add necessary packages
-PACKAGECONFIG_append = " alsa sql-sqlite sql-sqlite2 openssl icu accessibility examples"
+PACKAGECONFIG:append = " alsa sql-sqlite sql-sqlite2 openssl icu accessibility examples"
 
 # Select wayland as the default platform abstraction plugin for Qt
 CONF_ADD_X11 = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' -qpa xcb -xcb -xcb-xlib -system-xcb -eglfs', '', d)}"
 CONF_ADD_WAYLAND = "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', ' -qpa wayland -no-xcb -wayland', '', d)}"
 
-PACKAGECONFIG_CONFARGS_append += "\
+PACKAGECONFIG_CONFARGS:append += "\
 	-no-kms \
 	-no-gbm \
 	-no-gtkstyle \
@@ -51,12 +51,12 @@ PACKAGECONFIG_CONFARGS_append += "\
 "
 
 # add necessary packages
-PACKAGECONFIG_append += " sm linuxfb gles2"
+PACKAGECONFIG:append += " sm linuxfb gles2"
 
 # nis option is not supported anymore, disable it here
 PACKAGECONFIG[nis] = ""
 
-INSANE_SKIP_qtbase-plugins = " file-rdeps"
+INSANE_SKIP:qtbase-plugins = " file-rdeps"
 
 #Skip QA for patch-fuzz here because main layer meta-qt5 has patch that is not matched with source, also their source too.
-WARN_QA_remove = "patch-fuzz"
+WARN_QA:remove = "patch-fuzz"

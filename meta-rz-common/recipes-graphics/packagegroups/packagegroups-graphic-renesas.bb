@@ -7,7 +7,7 @@ PACKAGES = " \
     packagegroup-wayland-community \
 "
 
-RDEPENDS_packagegroup-wayland-community = " \
+RDEPENDS:packagegroup-wayland-community = " \
     wayland \
     weston \
     weston-examples \

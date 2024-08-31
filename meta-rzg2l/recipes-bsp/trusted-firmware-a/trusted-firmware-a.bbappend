@@ -29,17 +29,17 @@ EXTRA_FLAGS_rzv2l-dev = "BOARD=dev15_4"
 
 PMIC_BUILD_DIR = "${S}/build_pmic"
 
-FILES_${PN} = "/boot "
+FILES:${PN} = "/boot "
 SYSROOT_DIRS += "/boot"
 
 SEC_FLAGS = " \
 	${@oe.utils.conditional("ENABLE_SPD_OPTEE", "1", " SPD=opteed", "",d)} \
 "
 
-EXTRA_FLAGS_append += "${SEC_FLAGS}"
-PMIC_EXTRA_FLAGS_append += "${SEC_FLAGS}"
+EXTRA_FLAGS:append += "${SEC_FLAGS}"
+PMIC_EXTRA_FLAGS:append += "${SEC_FLAGS}"
 
-FILESEXTRAPATHS_append := "${THISDIR}/files"
+FILESEXTRAPATHS:append := "${THISDIR}/files"
 SRC_URI += " \
 	file://0001-plat-renesas-rz-Disable-unused-CRYPTO_SUPPORT.patch \
 "
@@ -47,8 +47,8 @@ SRC_URI += " \
 ECC_FLAGS = " DDR_ECC_ENABLE=1 "
 ECC_FLAGS += "${@oe.utils.conditional("ECC_MODE", "ERR_DETECT", "DDR_ECC_DETECT=1", "",d)}"
 ECC_FLAGS += "${@oe.utils.conditional("ECC_MODE", "ERR_DETECT_CORRECT", "DDR_ECC_DETECT_CORRECT=1", "",d)}"
-EXTRA_FLAGS_append = "${@oe.utils.conditional("USE_ECC", "1", " ${ECC_FLAGS} ", "",d)}"
-PMIC_EXTRA_FLAGS_append = "${@oe.utils.conditional("USE_ECC", "1", " ${ECC_FLAGS} ", "",d)}"
+EXTRA_FLAGS:append = "${@oe.utils.conditional("USE_ECC", "1", " ${ECC_FLAGS} ", "",d)}"
+PMIC_EXTRA_FLAGS:append = "${@oe.utils.conditional("USE_ECC", "1", " ${ECC_FLAGS} ", "",d)}"
 
 do_compile() {
 	oe_runmake PLAT=${PLATFORM} ${EXTRA_FLAGS} bl2 bl31
@@ -69,7 +69,7 @@ do_install() {
 	fi
 }
 
-do_deploy_append() {
+do_deploy:append() {
 	install -d ${DEPLOYDIR}/target/images
 	install -m 0644 ${D}/boot/bl2-${MACHINE}.bin ${DEPLOYDIR}/target/images/bl2-${MACHINE}.bin
 
@@ -79,13 +79,15 @@ do_deploy_append() {
 	fi
 }
 
+addtask install after do_compile before do_deploy
+
 # Support for RZ SBC board
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
 SRC_URI = " \
         git://github.com/Renesas-SST/rz-atf.git;branch=${BRANCH};protocol=https \
-        git://github.com/ARMmbed/mbedtls.git;branch=${BRANCH_mbedtls};name=mbedtls;destsuffix=mbedtls \
+        git://github.com/ARMmbed/mbedtls.git;branch=${BRANCH_mbedtls};name=mbedtls;destsuffix=mbedtls;protocol=https \
 "
 BRANCH = "dunfell/rz-sbc"
 SRCREV = "${AUTOREV}"
@@ -93,9 +95,9 @@ PV = "v2.9+git"
 
 COMPATIBLE_MACHINE_rzg2l = "(smarc-rzg2l|rzg2l-dev|smarc-rzg2lc|rzg2lc-dev|smarc-rzg2ul|rzg2ul-dev|smarc-rzv2l|rzv2l-dev|rzpi)"
 
-SRC_URI_remove = " \
+SRC_URI:remove = " \
 	file://0001-plat-renesas-rz-Disable-unused-CRYPTO_SUPPORT.patch \
-	git://github.com/ARMmbed/mbedtls.git;branch=mbedtls-2.28;name=mbedtls;destsuffix=mbedtls \
+	git://github.com/ARMmbed/mbedtls.git;branch=mbedtls-2.28;name=mbedtls;destsuffix=mbedtls;protocol=https \
 "
 
 PLATFORM_rzpi = "g2l"

@@ -160,7 +160,7 @@ USER_CLASSES ?= "buildstats image-mklibs image-prelink"
 # run tests against any SDK that are built. To enable this uncomment these lines.
 # See classes/test{image,sdk}.bbclass for further details.
 #IMAGE_CLASSES += "testimage testsdk"
-#TESTIMAGE_AUTO_qemuall = "1"
+#TESTIMAGE_AUTO:qemuall = "1"
 
 #
 # Interactive shell configuration
@@ -236,14 +236,14 @@ BB_DISKMON_DIRS ??= "\
 #
 # By default native qemu will build with a builtin VNC server where graphical output can be
 # seen. The line below enables the SDL UI frontend too.
-PACKAGECONFIG_append_pn-qemu-system-native = " sdl"
+PACKAGECONFIG:append:pn-qemu-system-native = " sdl"
 # By default libsdl2-native will be built, if you want to use your host's libSDL instead of
 # the minimal libsdl built by libsdl2-native then uncomment the ASSUME_PROVIDED line below.
 #ASSUME_PROVIDED += "libsdl2-native"
 
 # You can also enable the Gtk UI frontend, which takes somewhat longer to build, but adds
 # a handy set of menus for controlling the emulator.
-#PACKAGECONFIG_append_pn-qemu-system-native = " gtk+"
+#PACKAGECONFIG:append:pn-qemu-system-native = " gtk+"
 
 #
 # Hash Equivalence
@@ -265,14 +265,14 @@ PACKAGECONFIG_append_pn-qemu-system-native = " sdl"
 CONF_VERSION = "1"
 
 # Add systemd configuration
-DISTRO_FEATURES_append = " systemd"
+DISTRO_FEATURES:append = " systemd"
 VIRTUAL-RUNTIME_init_manager = "systemd"
 
 # add the static lib to SDK toolchain
-SDKIMAGE_FEATURES_append = " staticdev-pkgs dev-pkgs dbg-pkgs"
+SDKIMAGE_FEATURES:append = " staticdev-pkgs dev-pkgs dbg-pkgs"
 
 # Enable pam distro feature
-DISTRO_FEATURES_append = " pam"
+DISTRO_FEATURES:append = " pam"
 
 # Select CIP Core packages by switching betwwen Buster and Bullseye.
 #  - Buster (default)  : build all supported Debian 10 Buster recipes
@@ -294,7 +294,7 @@ INCOMPATIBLE_LICENSE = "GPLv3 GPLv3+"
 #BB_GIT_SHALLOW_DEPTH = "1"
 
 # Remove dnf package which causes high CPU workload
-PACKAGE_INSTALL_remove = " dnf "
+PACKAGE_INSTALL:remove = " dnf "
 
 # Support WIC images with default wks from WKS_DEFAULT_FILE
 # Reupdate WKS_DEFAULT_FILE if want to support another wks file.
@@ -317,5 +317,5 @@ IMAGE_ROOTFS_EXTRA_SPACE = "1048576"
 #  - ERR_DETECT : Setting enable ECC DDR and add error detection.
 #  - ERR_DETECT_CORRECT : Setting enable ECC DDR, add single bit error correction multibit detection
 # Example of setting:
-#MACHINE_FEATURES_append = " ecc"
+#MACHINE_FEATURES:append = " ecc"
 #ECC_MODE = "ENABLE"

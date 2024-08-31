@@ -3,7 +3,7 @@ SUMMARY = "OP-TEE sanity testsuite"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit deploy python3native
 
-LICENSE = "BSD & GPLv2"
+LICENSE = "BSD & GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${S}/LICENSE.md;md5=daa2bcccc666345ab8940aab1315a4fa"
 
 #TAG: 3.19.0
@@ -13,16 +13,16 @@ SRCREV = "ab9863cc187724e54c032b738c28bd6e9460a4db"
 BRANCH = "master"
 
 SRC_URI = " \
-	git://github.com/OP-TEE/optee_test.git;branch=${BRANCH} \
+	git://github.com/OP-TEE/optee_test.git;branch=${BRANCH};protocol=https \
 "
 
-DEPENDS_append = " optee-os optee-client"
-DEPENDS_append = " python3-pyelftools-native python3-cryptography-native python3-idna-native"
+DEPENDS:append = " optee-os optee-client"
+DEPENDS:append = " python3-pyelftools-native python3-cryptography-native python3-idna-native"
 
 OPTEE_CLIENT_EXPORT = "${STAGING_DIR_HOST}${prefix}"
 TA_DEV_KIT_DIR = "${STAGING_INCDIR}/optee/export-user_ta/"
 
-CFLAGS_prepend = "--sysroot=${STAGING_DIR_HOST}"
+CFLAGS:prepend = "--sysroot=${STAGING_DIR_HOST}"
 
 EXTRA_OEMAKE = " \
 	TA_DEV_KIT_DIR=${TA_DEV_KIT_DIR} \

@@ -6,7 +6,7 @@
 
 SUMMARY = "Perl scripting language"
 HOMEPAGE = "http://www.perl.org/"
-LICENSE = "Artistic-1.0 | GPL-1.0+"
+LICENSE = "Artistic-1.0 | GPL-1.0-or-later"
 LIC_FILES_CHKSUM = " \
     file://Copying;md5=5b122a36d0f6dc55279a0ebc69f3c60b \
     file://Artistic;md5=71a4d5d9acc18c0952a6df2218bb68da \
@@ -15,7 +15,7 @@ LIC_FILES_CHKSUM = " \
 inherit debian-package
 require recipes-debian/buster/sources/perl.inc
 
-FILESPATH_append = ":${COREBASE}/meta/recipes-devtools/perl-sanity/files"
+FILESPATH:append = ":${COREBASE}/meta/recipes-devtools/perl-sanity/files"
 SRC_URI += " \
     https://github.com/arsv/perl-cross/releases/download/1.2.2/perl-cross-1.2.2.tar.gz;name=perl-cross \
     file://perl-rdepends.txt \
@@ -34,7 +34,7 @@ SRC_URI[perl-cross.sha256sum] = "e6987838f27d8cd3368ea68fc56a68cc52371505950927b
 
 PR = "r1"
 
-do_unpack_append() {
+do_unpack:append() {
     bb.build.exec_func('do_unpack_extra', d)
 }
 
@@ -43,7 +43,7 @@ do_unpack_extra() {
 	mv ${WORKDIR}/metaconfig-* ${DEBIAN_UNPACK_DIR}/regen-configure
 }
 
-do_configure_class-target() {
+do_configure:class-target() {
 	./configure --prefix=${prefix} --libdir=${libdir} \
 	--target=${TARGET_SYS} \
 	-Duseshrplib \
@@ -66,7 +66,7 @@ do_configure_class-target() {
 	sed -i -e "s,${STAGING_LIBDIR},${libdir},g" config.h
 }
 
-do_configure_class-nativesdk() {
+do_configure:class-nativesdk() {
 	./configure --prefix=${prefix} \
 	--target=${TARGET_SYS} \
 	-Duseshrplib \
@@ -78,7 +78,7 @@ do_configure_class-nativesdk() {
 	sed -i -e "s,${STAGING_LIBDIR},${libdir},g" config.h
 }
 
-do_configure_class-native() {
+do_configure:class-native() {
 	./configure --prefix=${prefix} \
 	-Dbin=${bindir}/perl-native \
 	-Duseshrplib \
@@ -106,13 +106,13 @@ do_install() {
 	ln -sf ../../../../libperl.so.${PV} ${D}/${libdir}/perl5/${PV}/${TARGET_ARCH}-linux/CORE/libperl.so
 }
 
-do_install_append_class-target() {
+do_install:append:class-target() {
 	# This is used to substitute target configuration when running native perl via perl-configpm-switch.patch
 	ln -sf Config_heavy.pl ${D}${libdir}/perl5/${PV}/${TARGET_ARCH}-linux/Config_heavy-target.pl
 
 }
 
-do_install_append_class-nativesdk() {
+do_install:append:class-nativesdk() {
 	# This is used to substitute target configuration when running native perl via perl-configpm-switch.patch
 	ln -sf Config_heavy.pl ${D}${libdir}/perl5/${PV}/${TARGET_ARCH}-linux/Config_heavy-target.pl
 
@@ -120,7 +120,7 @@ do_install_append_class-nativesdk() {
 	    PERL5LIB='$PERL5LIB:$OECORE_NATIVE_SYSROOT/${libdir_nativesdk}/perl5/site_perl/${PV}:$OECORE_NATIVE_SYSROOT/${libdir_nativesdk}/perl5/vendor_perl/${PV}:$OECORE_NATIVE_SYSROOT/${libdir_nativesdk}/perl5/${PV}'
 }
 
-do_install_append_class-native () {
+do_install:append:class-native () {
 	# Those wrappers mean that perl installed from sstate (which may change
 	# path location) works and that in the nativesdk case, the SDK can be
 	# installed to a different location from the one it was built for.
@@ -169,10 +169,10 @@ perl_package_preprocess () {
 
 require perl-ptest.inc
 
-RDEPENDS_${PN}-ptest += " gcc binutils glibc-dev libgcc-dev linux-libc-headers-dev"
-INSANE_SKIP_${PN}-ptest += "dev-deps"
+RDEPENDS:${PN}-ptest += " gcc binutils glibc-dev libgcc-dev linux-libc-headers-dev"
+INSANE_SKIP:${PN}-ptest += "dev-deps"
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     ${bindir}/perl ${bindir}/perl.real ${bindir}/perl${PV} ${libdir}/libperl.so* \
     ${libdir}/perl5/site_perl \
     ${libdir}/perl5/${PV}/Config.pm \
@@ -184,13 +184,13 @@ FILES_${PN} = " \
     ${libdir}/perl5/${PV}/vars.pm \
     ${libdir}/perl5/site_perl \
 "
-RPROVIDES_${PN} += " \
+RPROVIDES:${PN} += " \
     perl-module-strict perl-module-vars perl-module-config perl-module-warnings \
     perl-module-warnings-register"
 
-FILES_${PN}-staticdev += "${libdir}/perl5/${PV}/*/CORE/libperl.a"
-FILES_${PN}-dev += "${libdir}/perl5/${PV}/*/CORE"
-FILES_${PN}-doc += " \
+FILES:${PN}-staticdev += "${libdir}/perl5/${PV}/*/CORE/libperl.a"
+FILES:${PN}-dev += "${libdir}/perl5/${PV}/*/CORE"
+FILES:${PN}-doc += " \
     ${libdir}/perl5/${PV}/Unicode/Collate/*.txt \
     ${libdir}/perl5/${PV}/*/.packlist \
     ${libdir}/perl5/${PV}/ExtUtils/MANIFEST.SKIP \
@@ -200,11 +200,11 @@ FILES_${PN}-doc += " \
 "
 PACKAGES += "${PN}-misc"
 
-FILES_${PN}-misc = "${bindir}/*"
+FILES:${PN}-misc = "${bindir}/*"
 
 PACKAGES += "${PN}-pod"
 
-FILES_${PN}-pod = " \
+FILES:${PN}-pod = " \
     ${libdir}/perl5/${PV}/pod \
     ${libdir}/perl5/${PV}/*.pod \
     ${libdir}/perl5/${PV}/*/*.pod \
@@ -214,15 +214,15 @@ FILES_${PN}-pod = " \
 
 PACKAGES += "${PN}-module-cpan ${PN}-module-unicore"
 
-FILES_${PN}-module-cpan += "${libdir}/perl5/${PV}/CPAN"
-FILES_${PN}-module-unicore += "${libdir}/perl5/${PV}/unicore"
+FILES:${PN}-module-cpan += "${libdir}/perl5/${PV}/CPAN"
+FILES:${PN}-module-unicore += "${libdir}/perl5/${PV}/unicore"
 
 # Create a perl-modules package recommending all the other perl
 # packages (actually the non modules packages and not created too)
-ALLOW_EMPTY_${PN}-modules = "1"
+ALLOW_EMPTY:${PN}-modules = "1"
 PACKAGES += "${PN}-modules "
 
-PACKAGESPLITFUNCS_prepend = "split_perl_packages "
+PACKAGESPLITFUNCS:prepend = "split_perl_packages "
 
 python split_perl_packages () {
     libdir = d.expand('${libdir}/perl5/${PV}')
@@ -237,21 +237,21 @@ python split_perl_packages () {
     # modules. Don't attempt to use the result of do_split_packages() as some
     # modules are manually split (eg. perl-module-unicore).
     packages = filter(lambda p: 'perl-module-' in p, d.getVar('PACKAGES').split())
-    d.setVar(d.expand("RRECOMMENDS_${PN}-modules"), ' '.join(packages))
+    d.setVar(d.expand("RRECOMMENDS:${PN}-modules"), ' '.join(packages))
 
     # Read the pre-generated dependency file, and use it to set module dependecies
     for line in open(d.expand("${WORKDIR}") + '/perl-rdepends.txt').readlines():
         splitline = line.split()
-        module = splitline[0].replace("RDEPENDS_perl", "RDEPENDS_${PN}")
+        module = splitline[0].replace("RDEPENDS:perl", "RDEPENDS:${PN}")
         depends = splitline[2].strip('"').replace("perl-module", "${PN}-module")
         d.appendVar(d.expand(module), " " + depends)
 }
 
-PACKAGES_DYNAMIC_class-target += "^perl-module-.*"
-PACKAGES_DYNAMIC_class-nativesdk += "^nativesdk-perl-module-.*"
+PACKAGES_DYNAMIC:class-target += "^perl-module-.*"
+PACKAGES_DYNAMIC:class-nativesdk += "^nativesdk-perl-module-.*"
 
-RDEPENDS_${PN}-misc += "perl perl-modules"
-RDEPENDS_${PN}-pod += "perl"
+RDEPENDS:${PN}-misc += "perl perl-modules"
+RDEPENDS:${PN}-pod += "perl"
 
 include perl-rdepends-extra.inc
 

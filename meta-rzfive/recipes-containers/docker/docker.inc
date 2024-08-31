@@ -56,7 +56,7 @@ inherit go
 inherit goarch
 inherit pkgconfig
 
-export CGO_ENABLED_riscv64 = "1"
+export CGO_ENABLED:riscv64 = "1"
 python(){
     d.appendVar('GOBUILDFLAGS', ' -buildmode=pie')
 }

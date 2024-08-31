@@ -1,10 +1,10 @@
 #These packages will be provided by external graphics library
-PACKAGECONFIG_remove = " ${@oe.utils.conditional('EXT_GFX_BACKEND', '1', 'egl gles',' ',d)}"
+PACKAGECONFIG:remove = " ${@oe.utils.conditional('EXT_GFX_BACKEND', '1', 'egl gles',' ',d)}"
 
 #Mesa only need provide gbm header
 INSTALLED_HEADER = "src/gbm/main/gbm.h"
 
-do_install_append() {
+do_install:append() {
         install -d ${D}/usr/include
         install -m 644 ${S}/${INSTALLED_HEADER} ${D}/usr/include/
         if [ "${EXT_GFX_BACKEND}" = "1" ]; then
@@ -15,8 +15,8 @@ do_install_append() {
         fi
 }
 
-FILES_{$PN} += " \
+FILES:{$PN} += " \
 	${D}/usr/include/* \
 "
 
-INSANE_SKIP_${PN} = "installed-vs-shipped"
+INSANE_SKIP:${PN} = "installed-vs-shipped"

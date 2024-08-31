@@ -10,7 +10,7 @@ PACKAGES = "\
     packagegroup-qt5-examples \
 "
 
-ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY:${PN} = "1"
 
 # Requires Wayland to work
 QT5_WAYLAND_PACKAGES = " \
@@ -26,7 +26,7 @@ QT5_EXAMPLES = " \
 	qtwebkit-examples-examples \
 "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
 	qtbase \
 	qtbase-plugins \
 	qtbase-tools \
@@ -54,7 +54,7 @@ RDEPENDS_${PN} += " \
 	qtwebkit \
 "
 
-RDEPENDS_${PN}-examples += " \
+RDEPENDS:${PN}-examples += " \
 	${PN} \
 	${QT5_EXAMPLES} \
 "

@@ -1,5 +1,5 @@
-DEPENDS_remove = "kernel-module-vspmif"
-RDEPENDS_packagegroup-multimedia-kernel-modules_remove = " \
+DEPENDS:remove = "kernel-module-vspmif"
+RDEPENDS:packagegroup-multimedia-kernel-modules:remove = " \
     kernel-module-vspmif \
 "
 

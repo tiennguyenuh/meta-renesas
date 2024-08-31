@@ -3,7 +3,7 @@ SUMMARY = "RZ/G2 Firmware Update TA"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit deploy python3native
 
-LICENSE = "BSD-3-Clause & GPLv2"
+LICENSE = "BSD-3-Clause & GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${S}/LICENSE.md;md5=e39af0548166c775f6685c6b69ec94f8"
 
 #TAG: 2.00
@@ -16,12 +16,12 @@ SRC_URI = " \
 	git://github.com/renesas-rz/rzg_optee-ta_fwu.git;branch=${BRANCH};protocol=https \
 " 
 
-DEPENDS_append = " optee-os optee-client python3-pyelftools-native python3-cryptography-native python3-pycryptodome-native python3-pycryptodomex-native"
+DEPENDS:append = " optee-os optee-client python3-pyelftools-native python3-cryptography-native python3-pycryptodome-native python3-pycryptodomex-native"
 
 OPTEE_CLIENT_EXPORT = "${STAGING_DIR_HOST}${prefix}"
 TA_DEV_KIT_DIR = "${STAGING_INCDIR}/optee/export-user_ta/"
 
-CFLAGS_prepend = "--sysroot=${STAGING_DIR_HOST} "
+CFLAGS:prepend = "--sysroot=${STAGING_DIR_HOST} "
 
 EXTRA_OEMAKE = " \
 	TA_DEV_KIT_DIR=${TA_DEV_KIT_DIR} \

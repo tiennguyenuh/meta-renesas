@@ -1,1 +1,1 @@
-RDEPENDS_${PN}_class-target_remove = " cpp cpp-symlinks"
+RDEPENDS:${PN}:class-target:remove = " cpp cpp-symlinks"

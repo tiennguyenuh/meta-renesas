@@ -6,7 +6,7 @@ PV_rzv2ma = "RZV2MA+git${SRCPV}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-FLASH_WRITER_URL = "git://github.com/renesas-rz/rzg2_flash_writer.git"
+FLASH_WRITER_URL = "git://github.com/renesas-rz/rzg2_flash_writer.git;branch=master;protocol=https"
 BRANCH_rzv2m = "rz_v2m"
 BRANCH_rzv2ma = "rz_v2ma"
 
@@ -16,13 +16,13 @@ SRCREV_rzv2ma = "02abd1200b9792465822927d04747b2ecaf58e6b"
 
 inherit deploy
 
-SRC_URI_append = " \
+SRC_URI:append = " \
 	file://0001-makefile.linaro-update-makefile-to-be-built-with-cro.patch \
 "
 
 S = "${WORKDIR}/git"
 
-CFLAGS_append = " -fno-stack-protector"
+CFLAGS:append = " -fno-stack-protector"
 
 do_compile () {
 	cd ${S}

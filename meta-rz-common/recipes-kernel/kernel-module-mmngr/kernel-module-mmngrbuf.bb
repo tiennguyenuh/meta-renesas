@@ -6,7 +6,7 @@ DEPENDS = "linux-renesas"
 PN = "kernel-module-mmngrbuf"
 PR = "r0"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
 	file://0001-mmngrbuf-Add-support-dmabuf_vmap-api.patch \
 "
 
@@ -14,7 +14,7 @@ S = "${WORKDIR}/git"
 MMNGRBUF_DRV_DIR = "mmngr_drv/mmngrbuf/mmngrbuf-module/files/mmngrbuf"
 
 includedir = "${RENESAS_DATADIR}/include"
-SSTATE_DUPWHITELIST += "${STAGING_INCDIR}"
+SSTATE_ALLOW_OVERLAP_FILES += "${STAGING_INCDIR}"
 
 # Build Memory Manager Buffer kernel module without suffix
 KERNEL_MODULE_PACKAGE_SUFFIX = ""
@@ -51,9 +51,9 @@ PACKAGES = "\
     ${PN}-dev \
 "
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     /lib/modules/${KERNEL_VERSION}/extra/mmngrbuf.ko \
 "
 
-RPROVIDES_${PN} += "kernel-module-mmngrbuf"
+RPROVIDES:${PN} += "kernel-module-mmngrbuf"
 KERNEL_MODULE_AUTOLOAD = "mmngrbuf"

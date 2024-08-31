@@ -1,11 +1,11 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
 	file://weston.sh \
 	file://weston.ini \
 "
 
-do_install_append() {
+do_install:append() {
 	if [ "X${EXT_GFX_BACKEND}" = "X1" ]; then
 		sed -e "/^After=/s/$/ dbus.service multi-user.target/" \
 		    -e "s/\$OPTARGS/--idle-time=0 \$OPTARGS/" \
@@ -24,7 +24,7 @@ do_install_append() {
 	mv ${D}/${sysconfdir}/init.d/weston ${D}/${sysconfdir}/init.d/weston@
 }
 
-FILES_${PN}_append = " \
+FILES:${PN}:append = " \
 	${sysconfdir}/profile.d/weston.sh \
 "
 

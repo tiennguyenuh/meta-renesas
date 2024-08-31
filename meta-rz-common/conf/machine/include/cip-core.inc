@@ -9,9 +9,9 @@ def check_debian_mode(d):
 DEBIAN_BASED = "${@check_debian_mode(d)}"
 OVERRIDES .= ":${DEBIAN_BASED}"
 
-BBMASK_append_nondebian = " recipes-debian"
+BBMASK:append_nondebian = " recipes-debian"
 
-BBMASK_append_debian = " perl_debian"
+BBMASK:append_debian = " perl_debian"
 
 # Select gcc,gdb, python3 debian version
 GCCVERSION_debian = "8.3.0"
@@ -29,9 +29,9 @@ PREFERRED_VERSION_gdb_debian = "8.1"
 
 PREFERRED_VERSION_busybox_debian = "1.30.%"
 
-RDEPENDS_xz_append_debian = "bash"
-RDEPENDS_gzip_append_debian = "bash"
-RDEPENDS_adduser_append_debian = "perl"
+RDEPENDS:xz:append_debian = "bash"
+RDEPENDS:gzip:append_debian = "bash"
+RDEPENDS:adduser:append_debian = "perl"
 
 # Using the package versions provided in the security update mirror
 # is now necessary to pull updates by Debian LTS

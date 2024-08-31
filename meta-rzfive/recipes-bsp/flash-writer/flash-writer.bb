@@ -4,7 +4,7 @@ PV = "0.89+git${SRCPV}"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-FLASH_WRITER_URL = "git://github.com/renesas-rz/rzg2_flash_writer"
+FLASH_WRITER_URL = "git://github.com/renesas-rz/rzg2_flash_writer;branch=master;protocol=https"
 BRANCH = "rz_five"
 SRCREV = "68cb0875cfcc5c5295ad74e6b97798ba5fad8126"
 

@@ -6,7 +6,7 @@ COMPATIBLE_MACHINE_rzg2l = "(smarc-rzg2l|rzg2l-dev|smarc-rzg2lc|rzg2lc-dev|smarc
 B = "${WORKDIR}/build"
 
 # Remove the patch URI if it exists
-SRC_URI_remove = " \
+SRC_URI:remove = " \
     file://0002-Workaround-GPU-driver-remove-power-domains-of-GPU-no.patch \
     file://0002-Workaround-GPU-driver-remove-power-domains-v2l.patch \
 "
@@ -15,20 +15,20 @@ SRC_URI_remove = " \
 KERNEL_DTC_FLAGS = "-@"
 KERNEL_DEVICETREE_OVERLAY ?= ""
 
-do_compile_prepend() {
+do_compile:prepend() {
     if [ -n "${KERNEL_DTC_FLAGS}" ]; then
        export DTC_FLAGS="${KERNEL_DTC_FLAGS}"
     fi
 }
 
-do_compile_append() {
+do_compile:append() {
     for dtbf in ${KERNEL_DEVICETREE_OVERLAY}; do
         dtb=`normalize_dtb "$dtbf"`
         oe_runmake $dtb CC="${KERNEL_CC} $cc_extra " LD="${KERNEL_LD}" ${KERNEL_EXTRA_ARGS}
     done
 }
 
-do_deploy_append(){
+do_deploy:append(){
     install -d ${DEPLOYDIR}/target/images/dtbs/overlays
     install -m 0644 ${B}/arch/arm64/boot/dts/renesas/overlays/* ${DEPLOYDIR}/target/images/dtbs/overlays
 

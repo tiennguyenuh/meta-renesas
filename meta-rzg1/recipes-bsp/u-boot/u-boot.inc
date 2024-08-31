@@ -67,7 +67,7 @@ do_install () {
     fi
 }
 
-FILES_${PN} = "/boot ${sysconfdir}"
+FILES:${PN} = "/boot ${sysconfdir}"
 FILESPATH =. "${FILE_DIRNAME}/u-boot-git/${MACHINE}:"
 
 do_deploy () {
@@ -87,7 +87,7 @@ do_deploy () {
     fi
 }
 
-do_deploy_append() {
+do_deploy:append() {
     install ${S}/${UBOOT_SREC} ${DEPLOYDIR}/${UBOOT_SREC_IMAGE}
 
     cd ${DEPLOYDIR}

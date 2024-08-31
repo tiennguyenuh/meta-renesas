@@ -160,7 +160,7 @@ USER_CLASSES ?= "buildstats image-mklibs image-prelink"
 # run tests against any SDK that are built. To enable this uncomment these lines.
 # See classes/test{image,sdk}.bbclass for further details.
 #IMAGE_CLASSES += "testimage testsdk"
-#TESTIMAGE_AUTO_qemuall = "1"
+#TESTIMAGE_AUTO:qemuall = "1"
 
 #
 # Interactive shell configuration
@@ -236,14 +236,14 @@ BB_DISKMON_DIRS ??= "\
 #
 # By default native qemu will build with a builtin VNC server where graphical output can be
 # seen. The line below enables the SDL UI frontend too.
-PACKAGECONFIG_append_pn-qemu-system-native = " sdl"
+PACKAGECONFIG:append:pn-qemu-system-native = " sdl"
 # By default libsdl2-native will be built, if you want to use your host's libSDL instead of
 # the minimal libsdl built by libsdl2-native then uncomment the ASSUME_PROVIDED line below.
 #ASSUME_PROVIDED += "libsdl2-native"
 
 # You can also enable the Gtk UI frontend, which takes somewhat longer to build, but adds
 # a handy set of menus for controlling the emulator.
-#PACKAGECONFIG_append_pn-qemu-system-native = " gtk+"
+#PACKAGECONFIG:append:pn-qemu-system-native = " gtk+"
 
 #
 # Hash Equivalence
@@ -265,18 +265,18 @@ PACKAGECONFIG_append_pn-qemu-system-native = " sdl"
 CONF_VERSION = "1"
 
 # Add systemd configuration
-DISTRO_FEATURES_append = " systemd"
+DISTRO_FEATURES:append = " systemd"
 VIRTUAL-RUNTIME_init_manager = "systemd"
 
 # add the static lib to SDK toolchain
-SDKIMAGE_FEATURES_append = " staticdev-pkgs dev-pkgs dbg-pkgs"
+SDKIMAGE_FEATURES:append = " staticdev-pkgs dev-pkgs dbg-pkgs"
 
 # Enable pam distro feature
-DISTRO_FEATURES_append = " pam"
+DISTRO_FEATURES:append = " pam"
 
 # Enable wayland and enable x11
-DISTRO_FEATURES_append = " wayland"
-#DISTRO_FEATURES_remove = " x11"
+DISTRO_FEATURES:append = " wayland"
+#DISTRO_FEATURES:remove = " x11"
 
 # Add qt5 demonstration to core-image-qt or not
 QT_DEMO = "1"
@@ -290,7 +290,7 @@ CIP_MODE = "Bullseye"
 
 INCOMPATIBLE_LICENSE = "GPLv3 GPLv3+"
 
-LICENSE_FLAGS_WHITELIST = " \
+LICENSE_FLAGS_ACCEPTED = " \
 	commercial_gstreamer1.0-plugins-ugly commercial_mpeg2dec \
 	commercial_gst-plugins-bad commercial_faad2 commercial_faac \
 	commercial_gstreamer1.0-libav commercial_ffmpeg commercial_x264 \
@@ -299,14 +299,14 @@ LICENSE_FLAGS_WHITELIST = " \
 # Enable multilib to support 32-bits applications.
 require conf/multilib.conf
 MULTILIBS = "multilib:lib32"
-DEFAULTTUNE_virtclass-multilib-lib32 = "armv7vethf-neon-vfpv4"
+DEFAULTTUNE:virtclass-multilib-lib32 = "armv7vethf-neon-vfpv4"
 USE_32BIT_PKGS = "1"
 
 # Comment out a following line to enable the Docker Engine.
-DISTRO_FEATURES_remove = " docker"
+DISTRO_FEATURES:remove = " docker"
 
 # For meta-virtualization layer
-DISTRO_FEATURES_append = "${@oe.utils.conditional('VIRTUALIZATION_CHECK', 'True', ' virtualization', '', d)}"
+DISTRO_FEATURES:append = "${@oe.utils.conditional('VIRTUALIZATION_CHECK', 'True', ' virtualization', '', d)}"
 
 # Generate compressed "git2_" gz of all git packages in DL_DIR
 #BB_GENERATE_MIRROR_TARBALLS = "1"
@@ -319,12 +319,12 @@ DISTRO_FEATURES_append = "${@oe.utils.conditional('VIRTUALIZATION_CHECK', 'True'
 #BB_GIT_SHALLOW_DEPTH = "1"
 
 # Remove dnf package which causes high CPU workload
-PACKAGE_INSTALL_remove = " dnf "
+PACKAGE_INSTALL:remove = " dnf "
 
 # Rootfs RZ SBC board
-IMAGE_INSTALL_append = " mmc-utils mtd-utils memtester minicom ca-certificates openssl dtc iputils ppp traceroute"
+IMAGE_INSTALL:append = " mmc-utils mtd-utils memtester minicom ca-certificates openssl dtc iputils ppp traceroute"
 
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
 				net-tools \
 				phytool \
 				lwb-fcc-firmware \
@@ -347,10 +347,10 @@ PREFERRED_RPROVIDER_wpa-supplicant-passphrase = "summit-supplicant-lwb"
 PREFERRED_RPROVIDER_wireless-regdb-static = "wireless-regdb"
 
 # Support wic image
-IMAGE_FSTYPES_append = " wic "
+IMAGE_FSTYPES:append = " wic "
 
 # Remove unused rootfs types
-IMAGE_FSTYPES_remove = " tar.gz ext4 "
+IMAGE_FSTYPES:remove = " tar.gz ext4 "
 
 # Linux bootloader flashing utility
 EXTRA_IMAGEDEPENDS += " bootloader-flasher-linux "
@@ -393,26 +393,26 @@ EXTRA_IMAGEDEPENDS += " readme "
 EXTRA_IMAGEDEPENDS += " rzpi-docs "
 
 # Chromium web browser
-IMAGE_INSTALL_append = " chromium-ozone-wayland"
-IMAGE_INSTALL_append = " ntp"
-IMAGE_INSTALL_append = " ttf-sazanami-gothic ttf-sazanami-mincho "
+IMAGE_INSTALL:append = " chromium-ozone-wayland"
+IMAGE_INSTALL:append = " ntp"
+IMAGE_INSTALL:append = " ttf-sazanami-gothic ttf-sazanami-mincho "
 PREFERRED_VERSION_nodejs-native = "14.%"
-DISTRO_FEATURES_append = " h264enc_lib"
-PACKAGECONFIG_pn-chromium-ozone-wayland =" proprietary-codecs"
+DISTRO_FEATURES:append = " h264enc_lib"
+PACKAGECONFIG:pn-chromium-ozone-wayland =" proprietary-codecs"
 
 # Add tkinter by default
-IMAGE_INSTALL_append = " python3-tkinter"
-PACKAGECONFIG_append_pn-python3 = " tk"
+IMAGE_INSTALL:append = " python3-tkinter"
+PACKAGECONFIG:append:pn-python3 = " tk"
 
 # Ignore vte-local-en-gb package because it has incompatible license GPL-3.0
 BAD_RECOMMENDATIONS += " vte-locale-en-gb"
 
 # Pre-installed Python libraries
-IMAGE_INSTALL_append = " python3-numpy"
-IMAGE_INSTALL_append = " python3-pandas"
-IMAGE_INSTALL_append = " python3-pyserial"
-IMAGE_INSTALL_append = " python3-matplotlib"
-IMAGE_INSTALL_append = " python3-pip"
+IMAGE_INSTALL:append = " python3-numpy"
+IMAGE_INSTALL:append = " python3-pandas"
+IMAGE_INSTALL:append = " python3-pyserial"
+IMAGE_INSTALL:append = " python3-matplotlib"
+IMAGE_INSTALL:append = " python3-pip"
 
 # Add default apt configuration sources
-IMAGE_INSTALL_append += " apt-sources-config "
+IMAGE_INSTALL:append += " apt-sources-config "

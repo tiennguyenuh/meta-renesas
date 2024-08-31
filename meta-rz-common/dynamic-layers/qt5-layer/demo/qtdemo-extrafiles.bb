@@ -1,7 +1,7 @@
 DESCRIPTION = "Recipe for extra files for Qt demonstration"
 LICENSE = "CLOSED"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI = " \
 	file://qtdemo-extrafiles.tar \
@@ -37,7 +37,7 @@ do_install() {
 	install -Dm 755 ${WORKDIR}/extra/*.png ${D}/home/root/demo/icons/
 }
 
-FILES_${PN} = " \
+FILES:${PN} = " \
 	/home/root/demo/* \
 	/home/root/videos/* \
 	/home/root/audios/* \

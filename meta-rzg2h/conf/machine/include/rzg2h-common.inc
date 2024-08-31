@@ -6,4 +6,4 @@ EXTRA_IMAGEDEPENDS += " optee-os"
 
 MACHINEOVERRIDES =. "rzg2h:"
 
-MACHINE_FEATURES_append = " opengles hwh264dec hwh264enc hwh265dec "
+MACHINE_FEATURES:append = " opengles hwh264dec hwh264enc hwh265dec "

@@ -1,7 +1,7 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 DEPENDS:append = " bc dtc-native opensbi"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
 	file://BootLoaderHeader.bin \
 	${@oe.utils.conditional("USE_ECC", "1", "file://0001-riscv-dts-rzf-reserved-memory-area-for-ECC-region.patch", "", d)} \
 	${@oe.utils.conditional("USE_ECC", "1", "file://0002-configs-rzf_defconfig-enable-ECC-configs-support-for.patch", "", d)} \

@@ -1,5 +1,5 @@
 # Basic packages
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
     bonnie++ \
     util-linux \
     busybox \
@@ -32,7 +32,7 @@ IMAGE_INSTALL_append = " \
 "
 
 # Installation for Wifi/Bluetooth packages
-IMAGE_INSTALL_append_rzg2h = " \
+IMAGE_INSTALL:append_rzg2h = " \
     linux-firmware-ti-connectivity-license \
     linux-firmware-wl18xx \
     init-ifupdown \
@@ -47,7 +47,7 @@ IMAGE_INSTALL_append_rzg2h = " \
 "
 
 # Additional tools for support Tool develop
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
     ckermit \
     connman \
     connman-client \
@@ -61,12 +61,12 @@ IMAGE_INSTALL_append = " \
 "
 
 # Additional tools for support testing Realtime characteristic in system
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
 	${@oe.utils.conditional("IS_RT_BSP", "1", " rt-tests ", " ",d)} \
 "
 
 # Additional configurations for RZ SBC
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
     uenv \
     spitools \
     python3-smbus \
@@ -123,14 +123,14 @@ ROOTFS_POSTPROCESS_COMMAND += " add_overlays_rootfs; add_bootloader_rootfs; depl
 DEPENDS += " firmware-pack linux-renesas"
 
 # Install core-image-qt.env to target/env
-python do_rootfs_wicenv_append () {
+python do_rootfs_wicenv:append () {
     target_dir = os.path.join(depdir, 'target/env')
     os.makedirs(target_dir, exist_ok=True)
     bb.utils.copyfile(os.path.join(outdir, basename) + '.env', os.path.join(target_dir, basename) + '.env')
 }
 
 # Install file rootfs.manifest to host/build
-python write_image_manifest_append () {
+python write_image_manifest:append () {
     # Create target dir host/build
     target_dir = os.path.join(deploy_dir, 'host/build')
     os.makedirs(target_dir, exist_ok=True)
@@ -149,7 +149,7 @@ python write_image_manifest_append () {
 }
 
 # Install file testdata.json to host/build
-python write_image_test_data_append () {
+python write_image_test_data:append () {
     # Create the directory deploy_dir/host/build
     target_dir = os.path.join(deploy_dir, 'host/build')
     os.makedirs(target_dir, exist_ok=True)
@@ -167,7 +167,7 @@ python write_image_test_data_append () {
 }
 
 # Move wic file from deploy complete folder to target/images directory
-IMAGE_CMD_wic_prepend() {
+IMAGE_CMD:wic:prepend() {
     target_dir="${IMGDEPLOYDIR}/target/images"
 
     # Create the target directory if it does not exist
@@ -183,14 +183,14 @@ IMAGE_CMD_wic_prepend() {
     fi
 }
 
-IMAGE_CMD_wic_append() {
+IMAGE_CMD:wic:append() {
     # Remove existing wic file and move the output to target directory
     rm -f "${target_dir}"/*.wic
     mv "$out${IMAGE_NAME_SUFFIX}.wic" "${target_dir}/${IMAGE_LINK_NAME}.wic"
 }
 
 # Move tar file from deploy complete folder to target/images/rootfs directory
-CONVERSION_CMD_bz2_append() {
+CONVERSION_CMD:bz2:append() {
     # Define the target directory and file path
     out="${IMGDEPLOYDIR}/${IMAGE_NAME}"
     target_dir="${IMGDEPLOYDIR}/target/images/rootfs"

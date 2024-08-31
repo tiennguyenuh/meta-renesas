@@ -1,7 +1,7 @@
 inherit module
 require include/rz-modules-common.inc
 
-LICENSE = "GPLv2 & MIT"
+LICENSE = "GPL-2.0-only & MIT"
 LIC_FILES_CHKSUM = " \
     file://drv/GPL-COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
     file://drv/MIT-COPYING;md5=fea016ce2bdf2ec10080f69e9381d378 \
@@ -50,14 +50,14 @@ PACKAGES = "\
     ${PN}-dev \
 "
 
-FILES_${PN}-dev = " \
+FILES:${PN}-dev = " \
     ${includedir}/*.h \
     ${includedir}/vspm.symvers \
 "
 
-RPROVIDES_${PN} += "kernel-module-vspm"
+RPROVIDES:${PN} += "kernel-module-vspm"
 
-python do_package_ipk_prepend () {
+python do_package_ipk:prepend () {
     d.setVar('ALLOW_EMPTY', '1')
 }
 

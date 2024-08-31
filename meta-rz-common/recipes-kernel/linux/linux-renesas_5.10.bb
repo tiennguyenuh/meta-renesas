@@ -2,7 +2,7 @@ DESCRIPTION = "Linux kernel for the RZG2 based board"
 
 require recipes-kernel/linux/linux-yocto.inc
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}/:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}/:"
 COMPATIBLE_MACHINE_rzg2l = "(smarc-rzg2l|rzg2l-dev|smarc-rzg2lc|rzg2lc-dev|smarc-rzg2ul|rzg2ul-dev|smarc-rzv2l|rzv2l-dev)"
 COMPATIBLE_MACHINE_rzg2h = "(ek874|hihope-rzg2n|hihope-rzg2m|hihope-rzg2h)"
 COMPATIBLE_MACHINE_rzfive = "(smarc-rzfive|rzfive-dev)"
@@ -11,7 +11,7 @@ COMPATIBLE_MACHINE_rzv2ma = "(rzv2ma)"
 COMPATIBLE_MACHINE_rzg1 = "(iwg20m-g1m|iwg20m-g1n|iwg21m|iwg22m|iwg23s)"
 
 KERNEL_URL = " \
-    git://github.com/renesas-rz/rz_linux-cip.git"
+    git://github.com/renesas-rz/rz_linux-cip.git;branch=master;protocol=https"
 BRANCH = "${@oe.utils.conditional("IS_RT_BSP", "1", "rz-5.10-cip36-rt14", "rz-5.10-cip36",d)}"
 SRCREV = "${@oe.utils.conditional("IS_RT_BSP", "1", "80929ede34ab51d9a80e366837e89c0eaf0ac2cb", "1fa7acb4360944216070a41a9da26e6595c20998",d)}"
 
@@ -22,7 +22,7 @@ LINUX_VERSION ?= "${@oe.utils.conditional("IS_RT_BSP", "1", "5.10.184-cip36-rt14
 PV = "${LINUX_VERSION}+git${SRCPV}"
 PR = "r1"
 
-SRC_URI_append = "\
+SRC_URI:append = "\
   file://touch.cfg \
 "
 
@@ -36,7 +36,7 @@ do_kernel_metadata_af_patch() {
 	do_kernel_metadata
 }
 
-do_deploy_append() {
+do_deploy:append() {
 	for dtbf in ${KERNEL_DEVICETREE}; do
 		dtb=`normalize_dtb "$dtbf"`
 		dtb_ext=${dtb##*.}

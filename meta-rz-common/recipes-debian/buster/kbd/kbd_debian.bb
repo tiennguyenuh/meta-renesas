@@ -11,19 +11,19 @@ inherit debian-package
 require recipes-debian/buster/sources/kbd.inc
 
 # everything minus console-fonts is GPLv2+
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a5fcc36121d93e1f69d96a313078c8b5"
 
-FILESPATH_append = ":${COREBASE}/meta/recipes-core/kbd/kbd:${THISDIR}/kbd"
+FILESPATH:append = ":${COREBASE}/meta/recipes-core/kbd/kbd:${THISDIR}/kbd"
 SRC_URI += "file://run-ptest \
             ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'file://set-proper-path-of-resources.patch', '', d)} \
             "
 
 inherit autotools gettext ptest pkgconfig
 
-RREPLACES_${PN} = "console-tools"
-RPROVIDES_${PN} = "console-tools"
-RCONFLICTS_${PN} = "console-tools"
+RREPLACES:${PN} = "console-tools"
+RPROVIDES:${PN} = "console-tools"
+RCONFLICTS:${PN} = "console-tools"
 
 PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
                   ${@bb.utils.contains('PTEST_ENABLED', '1', 'tests','', d)} \
@@ -56,14 +56,14 @@ do_install_ptest() {
 
 PACKAGES += "${PN}-consolefonts ${PN}-keymaps ${PN}-unimaps ${PN}-consoletrans"
 
-FILES_${PN}-consolefonts = "${datadir}/consolefonts"
-FILES_${PN}-consoletrans = "${datadir}/consoletrans"
-FILES_${PN}-keymaps = "${datadir}/keymaps"
-FILES_${PN}-unimaps = "${datadir}/unimaps"
+FILES:${PN}-consolefonts = "${datadir}/consolefonts"
+FILES:${PN}-consoletrans = "${datadir}/consoletrans"
+FILES:${PN}-keymaps = "${datadir}/keymaps"
+FILES:${PN}-unimaps = "${datadir}/unimaps"
 
 inherit update-alternatives
 
-ALTERNATIVE_${PN} = "chvt deallocvt fgconsole openvt showkey"
+ALTERNATIVE:${PN} = "chvt deallocvt fgconsole openvt showkey"
 ALTERNATIVE_PRIORITY = "100"
 
 BBCLASSEXTEND = "native"

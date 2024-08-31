@@ -1,6 +1,6 @@
 DESCRIPTION = "VSP Manager Interface driver for the RZG2"
 
-LICENSE = "GPLv2 & MIT"
+LICENSE = "GPL-2.0-only & MIT"
 LIC_FILES_CHKSUM = " \
     file://GPL-COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
     file://MIT-COPYING;md5=0ebf15a927e436cec699371cd890775c \
@@ -14,13 +14,13 @@ PN = "kernel-module-vspmif"
 PR = "r0"
 
 VSPMIF_DRV_URL = " \
-    git://github.com/renesas-rcar/vspmif_drv.git"
+    git://github.com/renesas-rcar/vspmif_drv.git;branch=master;protocol=https"
 BRANCH = "rcar_gen3"
 SRCREV = "2fdb2838a5625e4231f1cff5d10079acc4954952"
 
 SRC_URI = "${VSPMIF_DRV_URL};branch=${BRANCH}"
 
-SRC_URI_append_rzg2l = " \
+SRC_URI:append_rzg2l = " \
 	file://0001-Add-ISU-to-vspmif.patch \
 	file://0002-Remove-width-height-in-isu_dst_t.patch \
 	file://0003-Correcting-variable-type.patch \
@@ -66,11 +66,11 @@ PACKAGES = "\
     ${PN}-dev \
 "
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     /lib/modules/${KERNEL_VERSION}/extra/vspm_if.ko \
     /etc/modules-load.d/vspm_if.conf \
 "
 
-RPROVIDES_${PN} += "kernel-module-vspmif kernel-module-vspm-if"
+RPROVIDES:${PN} += "kernel-module-vspmif kernel-module-vspm-if"
 
 KERNEL_MODULE_AUTOLOAD = "vspm_if vspmif"

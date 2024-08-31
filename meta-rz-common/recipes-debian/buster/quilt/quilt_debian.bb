@@ -7,4 +7,4 @@
 require quilt.inc
 inherit gettext
 
-RDEPENDS_${PN}-ptest += "${PN}"
+RDEPENDS:${PN}-ptest += "${PN}"

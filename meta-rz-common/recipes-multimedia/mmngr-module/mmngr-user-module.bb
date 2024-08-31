@@ -18,7 +18,7 @@ CFLAGS += " -I${STAGING_DIR_HOST}${RENESAS_DATADIR}/include"
 
 CFLAGS += " ${@oe.utils.conditional('USE_32BIT_PKGS', '1', ' -I${STAGING_KERNEL_DIR}/include ', '', d)} "
 
-do_install_append() {
+do_install:append() {
     if [ -f ${D}${RENESAS_DATADIR}/bin/mmtp ]; then
         if [ X${WS} = "X32" ]; then
             mv ${D}${RENESAS_DATADIR}/bin/mmtp ${D}${RENESAS_DATADIR}/bin/mmtp${WS}

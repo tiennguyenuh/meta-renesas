@@ -5,10 +5,10 @@ SUMMARY = "General purpose cryptographic library based on the code from GnuPG"
 HOMEPAGE = "http://directory.fsf.org/project/libgcrypt/"
 
 # helper program gcryptrnd and getrandom are under GPL, rest LGPL
-LICENSE = "GPLv2+ & LGPLv2.1+ & GPLv3+"
-LICENSE_${PN} = "LGPLv2.1+"
-LICENSE_${PN}-dev = "GPLv2+ & LGPLv2.1+"
-LICENSE_dumpsexp-dev = "GPLv3+"
+LICENSE = "GPL-2.0-or-later & LGPL-2.1-or-later & GPL-3.0-or-later"
+LICENSE:${PN} = "LGPL-2.1-or-later"
+LICENSE:${PN}-dev = "GPL-2.0-or-later & LGPL-2.1-or-later"
+LICENSE:dumpsexp-dev = "GPL-3.0-or-later"
 
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
@@ -21,7 +21,7 @@ LIC_FILES_CHKSUM = " \
 inherit debian-package
 require recipes-debian/buster/sources/libgcrypt20.inc
 
-FILESPATH_append = ":${COREBASE}/meta/recipes-support/libgcrypt/files"
+FILESPATH:append = ":${COREBASE}/meta/recipes-support/libgcrypt/files"
 SRC_URI += " \
     file://0001-Add-and-use-pkg-config-for-libgcrypt-instead-of-conf.patch \
     file://0002-libgcrypt-fix-building-error-with-O2-in-sysroot-path.patch \
@@ -35,24 +35,24 @@ inherit autotools texinfo binconfig-disabled pkgconfig
 BINCONFIG = "${bindir}/libgcrypt-config"
 
 EXTRA_OECONF = "--disable-asm"
-EXTRA_OEMAKE_class-target = "LIBTOOLFLAGS='--tag=CC'"
+EXTRA_OEMAKE:class-target = "LIBTOOLFLAGS='--tag=CC'"
 
 PACKAGECONFIG ??= "capabilities"
 PACKAGECONFIG[capabilities] = "--with-capabilities,--without-capabilities,libcap"
 
-do_configure_prepend() {
+do_configure:prepend() {
 	rm -f ${S}/m4/gpg-error.m4
 }
 
 # libgcrypt.pc is added locally and thus installed here
-do_install_append() {
+do_install:append() {
 	install -d ${D}/${libdir}/pkgconfig
 	install -m 0644 ${B}/src/libgcrypt.pc ${D}/${libdir}/pkgconfig/
 }
 
 PACKAGES =+ "dumpsexp-dev"
 
-FILES_${PN}-dev += "${bindir}/hmac256"
-FILES_dumpsexp-dev += "${bindir}/dumpsexp"
+FILES:${PN}-dev += "${bindir}/hmac256"
+FILES:dumpsexp-dev += "${bindir}/dumpsexp"
 
 BBCLASSEXTEND = "native nativesdk"

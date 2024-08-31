@@ -4,12 +4,12 @@
 
 require ${COREBASE}/meta/recipes-devtools/pseudo/pseudo.inc
 
-LICENSE = "LGPLv2.1"
+LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=a1d8023a6f953ac6ea4af765ff62d574"
 
 inherit debian-package
 require recipes-debian/bullseye/sources/pseudo.inc
-FILESPATH_append = ":${COREBASE}/meta/recipes-devtools/pseudo/files:${THISDIR}/pseudo"
+FILESPATH:append = ":${COREBASE}/meta/recipes-devtools/pseudo/files:${THISDIR}/pseudo"
 DEPENDS += "python3-native"
 
 SRC_URI += " \

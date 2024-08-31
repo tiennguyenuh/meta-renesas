@@ -2,10 +2,10 @@
 require qt5.6.3_git.inc
 SRCREV = "e6f8b072d2bf15f8b82bede48ff29ce8ac8dbd9a"
 
-FILESEXTRAPATHS_append := "${THISDIR}/qtbase:"
+FILESEXTRAPATHS:append := "${THISDIR}/qtbase:"
 
 # Replace patch to work with Qt5.6.3, old patch only work with Qt.5.6.2
-SRC_URI_remove = "file://0010-Add-external-hostbindir-option-for-native-sdk.patch"
+SRC_URI:remove = "file://0010-Add-external-hostbindir-option-for-native-sdk.patch"
 SRC_URI += " file://0011-Add-external-hostbindir-option-for-native-sdk.patch"
 
 LIC_FILES_CHKSUM = " \
@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 # Solve issue build qtbase-native due to no exist "-no-nis" and "-no-gui" setting anymore.
-PACKAGECONFIG_CONFARGS_remove = "-no-nis -no-gui"
+PACKAGECONFIG_CONFARGS:remove = "-no-nis -no-gui"
 
 #Skip QA for patch-fuzz here because main layer meta-qt5 has patch that is not matched with source, also their source too.
-WARN_QA_remove = "patch-fuzz"
+WARN_QA:remove = "patch-fuzz"

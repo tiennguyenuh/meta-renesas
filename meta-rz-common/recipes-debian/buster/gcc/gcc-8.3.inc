@@ -13,7 +13,7 @@ FILESEXTRAPATHS =. "${FILE_DIRNAME}/gcc-8.3:"
 DEPENDS =+ "mpfr gmp libmpc zlib flex-native"
 NATIVEDEPS = "mpfr-native gmp-native libmpc-native zlib-native flex-native"
 
-LICENSE = "GPL-3.0-with-GCC-exception & GPLv3"
+LICENSE = "GPL-3.0-with-GCC-exception & GPL-3.0-only"
 
 LIC_FILES_CHKSUM = "\
     file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
@@ -26,7 +26,7 @@ LIC_FILES_CHKSUM = "\
 #RELEASE = "8.0.1-RC-20180427"
 BASEURI ?= "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.xz"
 #SRCREV = "f7cf798b73fd1a07098f9a490deec1e2a36e0bed"
-#BASEURI ?= "git://github.com/gcc-mirror/gcc;branch=gcc-6-branch;protocol=git"
+#BASEURI ?= "git://github.com/gcc-mirror/gcc;branch=gcc-6-branch;protocol=https"
 #BASEURI ?= "http://mirrors.concertpass.com/gcc/snapshots/${RELEASE}/gcc-${RELEASE}.tar.xz"
 
 SRC_URI = "\
@@ -93,7 +93,7 @@ JAVA = ""
 
 LTO = "--enable-lto"
 SSP ?= "--disable-libssp"
-SSP_mingw32 = "--enable-libssp"
+SSP:mingw32 = "--enable-libssp"
 
 EXTRA_OECONF_BASE = "\
     ${LTO} \

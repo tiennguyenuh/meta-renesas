@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=69663ab153298557a59c67a60a743e5b"
 PR = "r0"
 PV = "3.19.0+git${SRCPV}"
 BRANCH = "master"
-SRC_URI = "git://github.com/OP-TEE/optee_client.git;branch=${BRANCH}"
+SRC_URI = "git://github.com/OP-TEE/optee_client.git;branch=${BRANCH};protocol=https"
 # Tag 3.19.0
 SRCREV = "140bf463046071d3ca5ebbde3fb21ee0854e1951"
 
@@ -13,10 +13,10 @@ SRC_URI += " \
     file://optee.service \
 "
 
-DEPENDS_append = "util-linux"
+DEPENDS:append = "util-linux"
 
 inherit python3native systemd
-SYSTEMD_SERVICE_${PN} = "optee.service"
+SYSTEMD_SERVICE:${PN} = "optee.service"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
@@ -48,7 +48,7 @@ do_install () {
 }
 
 # install the tee-supplicant for 64 bit only.
-do_install_append_aarch64 () {
+do_install:append:aarch64 () {
     # Create destination directory
     install -d ${D}/${bindir}
 
@@ -56,6 +56,6 @@ do_install_append_aarch64 () {
     install -m 0755 ${S}/out/export/usr/sbin/tee-supplicant ${D}/${bindir}
 }
 
-RPROVIDES_${PN} += "optee-client"
+RPROVIDES:${PN} += "optee-client"
 
-FILES_${PN} += "${libdir} ${includedir}"
+FILES:${PN} += "${libdir} ${includedir}"

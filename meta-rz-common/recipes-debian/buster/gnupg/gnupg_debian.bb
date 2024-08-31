@@ -1,7 +1,7 @@
 SUMMARY = "GNU Privacy Guard - encryption and signing tools (2.x)"
 HOMEPAGE = "https://www.gnupg.org/"
 
-LICENSE = "GPLv3+ & LGPLv3+ & LGPLv2.1+ & MIT & BSD & CC0-1.0"
+LICENSE = "GPL-3.0-or-later & LGPL-3.0-or-later & LGPL-2.1-or-later & MIT & BSD & CC0-1.0"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=189af8afca6d6075ba6c9e0aa8077626 \
     file://COPYING.LGPL3;md5=a2b6bf2cb38ee52619e60f30a1fc7257 \
@@ -14,13 +14,13 @@ LIC_FILES_CHKSUM = " \
 inherit debian-package
 require recipes-debian/buster/sources/gnupg2.inc
 
-FILESPATH_append = ":${COREBASE}/meta/recipes-support/gnupg/gnupg"
+FILESPATH:append = ":${COREBASE}/meta/recipes-support/gnupg/gnupg"
 SRC_URI += " \
     file://0001-Use-pkg-config-to-find-pth-instead-of-pth-config.patch \
     file://0002-use-pkgconfig-instead-of-npth-config.patch \
 "
 
-SRC_URI_append_class-native = " \
+SRC_URI:append:class-native = " \
     file://0001-configure.ac-use-a-custom-value-for-the-location-of-.patch \
     file://relocate.patch \
 "
@@ -42,22 +42,22 @@ PACKAGECONFIG ??= "gnutls"
 PACKAGECONFIG[gnutls] = "--enable-gnutls, --disable-gnutls, gnutls"
 PACKAGECONFIG[sqlite3] = "--enable-sqlite, --disable-sqlite, sqlite3"
 
-do_configure_prepend() {
+do_configure:prepend() {
 	rm -f ${S}/m4/gpg-error.m4
 	rm -f ${S}/m4/libassuan.m4
 	rm -f ${S}/m4/ksba.m4
 	rm -f ${S}/m4/libgcrypt.m4
 }
 
-do_install_append() {
+do_install:append() {
 	ln -sf gpg2 ${D}${bindir}/gpg
 	ln -sf gpgv2 ${D}${bindir}/gpgv
 }
 
-do_install_append_class-native() {
+do_install:append:class-native() {
 	create_wrapper ${D}${bindir}/gpg2 GNUPG_BINDIR=${STAGING_BINDIR_NATIVE}
 }
 
-RRECOMMENDS_${PN} = "pinentry"
+RRECOMMENDS:${PN} = "pinentry"
 
 BBCLASSEXTEND = "native"
