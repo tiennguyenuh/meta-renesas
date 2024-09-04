@@ -392,7 +392,7 @@ EXTRA_IMAGEDEPENDS += " uload-bootloader-win "
 EXTRA_IMAGEDEPENDS += " uload-bootloader-readme "
 
 # uEnv.txt
-EXTRA_IMAGEDEPENDS += " uenv "
+IMAGE_INSTALL:append = " uenv "
 
 # host-readme
 EXTRA_IMAGEDEPENDS += " host-readme "
@@ -419,7 +419,7 @@ IMAGE_INSTALL:append = " python3-matplotlib"
 IMAGE_INSTALL:append = " python3-pip"
 
 # Add default apt configuration sources
-IMAGE_INSTALL:append += " apt-sources-config "
+IMAGE_INSTALL:append = " apt-sources-config "
 
 # Remove optee
 IMAGE_INSTALL:remove = " optee-client"

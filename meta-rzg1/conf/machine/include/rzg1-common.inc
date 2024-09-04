@@ -18,13 +18,13 @@ EXTRA_IMAGEDEPENDS += " u-boot"
 
 # We must disable ptest when can not use GPLv3 License,
 # ptest require many package, which have GPLv3 License,
-DISTRO_FEATURES:remove += "${@bb.utils.contains("INCOMPATIBLE_LICENSE", "GPLv3", "ptest", "",d)}"
+DISTRO_FEATURES:remove = "${@bb.utils.contains("INCOMPATIBLE_LICENSE", "GPLv3", "ptest", "",d)}"
 
 # Match version between native and target sysroot in meta-gplv2 when not using GPLv3.
 PREFERRED_VERSION_gdbm-native ?= "${@bb.utils.contains("INCOMPATIBLE_LICENSE", "GPLv3", "1.8.3", "",d)}"
 
 BBMASK:append = " optee-client trusted-firmware-a optee-test"
-IMAGE_INSTALL:remove += "optee-client"
+IMAGE_INSTALL:remove = "optee-client"
 
 # Avoid using these recipes in meta-rz-common, use rzg1 recipes instead
 BBMASK:append = " meta-rz-common/recipes-multimedia/mmngr-module meta-rz-common/recipes-multimedia/vspmif-module"

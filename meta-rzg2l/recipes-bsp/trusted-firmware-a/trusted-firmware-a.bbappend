@@ -36,8 +36,8 @@ SEC_FLAGS = " \
 	${@oe.utils.conditional("ENABLE_SPD_OPTEE", "1", " SPD=opteed", "",d)} \
 "
 
-EXTRA_FLAGS:append += "${SEC_FLAGS}"
-PMIC_EXTRA_FLAGS:append += "${SEC_FLAGS}"
+EXTRA_FLAGS:append = "${SEC_FLAGS}"
+PMIC_EXTRA_FLAGS:append = "${SEC_FLAGS}"
 
 FILESEXTRAPATHS:append := "${THISDIR}/files"
 SRC_URI += " \

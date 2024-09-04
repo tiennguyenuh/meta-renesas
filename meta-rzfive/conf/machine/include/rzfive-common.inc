@@ -19,7 +19,7 @@ BUILDCFG_VARS:append = " SOC_FAMILY"
 
 # We must disable ptest when can not use GPLv3 License,
 # ptest require many package, which have GPLv3 License,
-DISTRO_FEATURES:remove += "${@bb.utils.contains("INCOMPATIBLE_LICENSE", "GPLv3", "ptest", "",d)}"
+DISTRO_FEATURES:remove = "${@bb.utils.contains("INCOMPATIBLE_LICENSE", "GPLv3", "ptest", "",d)}"
 
 # Match version between native and target sysroot in meta-gplv2 when not using GPLv3.
 PREFERRED_VERSION_gdbm-native ?= "${@bb.utils.contains("INCOMPATIBLE_LICENSE", "GPLv3", "1.8.3", "",d)}"
@@ -28,7 +28,7 @@ PREFERRED_VERSION_gdbm-native ?= "${@bb.utils.contains("INCOMPATIBLE_LICENSE", "
 PREFERRED_VERSION_u-boot = "v2021.10%"
 EXTRA_IMAGEDEPENDS += " u-boot"
 
-PACKAGE_INSTALL:remove += " optee-client v4l2-init "
+PACKAGE_INSTALL:remove = " optee-client v4l2-init "
 
 DISTRO_FEATURES:append = " docker"
 

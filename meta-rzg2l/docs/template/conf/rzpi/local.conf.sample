@@ -415,4 +415,4 @@ IMAGE_INSTALL:append = " python3-matplotlib"
 IMAGE_INSTALL:append = " python3-pip"
 
 # Add default apt configuration sources
-IMAGE_INSTALL:append += " apt-sources-config "
+IMAGE_INSTALL:append = " apt-sources-config "
